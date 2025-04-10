@@ -8,6 +8,7 @@ import { REG_NAME } from "../../config/regex";
 import { useDispatch } from "react-redux";
 import { DispatchType } from "../../store/store";
 import { setUser } from "./authSLice";
+import Title from "../../components/Title";
 
 const schema = z.object({
   name: z
@@ -29,7 +30,7 @@ const AuthForm: FC = () => {
     formState: { errors },
     handleSubmit,
     reset,
-    // watch,
+    watch,
   } = useForm<FormAuthType>({
     mode: "onChange",
     resolver: zodResolver(schema),
@@ -57,9 +58,7 @@ const AuthForm: FC = () => {
         }}
       >
         <div className="el__card_bg">
-          <div className="w-full flex justify-center">
-            <span className="txt__h__sm">Let us know more about you</span>
-          </div>
+          <Title {...{ title: "Let us know more about you" }} />
 
           <label className="w-full relative">
             {/* IF U PREFER SCALE */}
@@ -91,7 +90,7 @@ const AuthForm: FC = () => {
             <input
               autoFocus={true}
               type="text"
-              className="w-full outline-0 rounded-[15px] p-[15px] txt__f"
+              className="w-full outline-0 rounded-[15px] p-[15px] txt__f cursor-pointer"
               {...setStyle({ backgroundColor: "var(--bg__0)" })}
               placeholder="NAME"
               {...register("name", {
@@ -108,7 +107,7 @@ const AuthForm: FC = () => {
         }}
       >
         <button
-          // disabled={!watch("name") || !!errors?.name?.message}
+          disabled={!watch("name") || !!errors?.name?.message}
           type="submit"
           className="el__btn_bg rounded-[15px]"
         >
