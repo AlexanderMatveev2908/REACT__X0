@@ -16,6 +16,7 @@ export interface GameStateType {
   CPU: PlayerType;
   currMark: MarkType;
   gridGame: CellType[];
+  isPending: boolean;
 }
 
 const savedData = sessionStorage.getItem("gameState");
@@ -32,6 +33,7 @@ const initState: GameStateType = savedData
       },
       currMark: "X",
       gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
+      isPending: false,
     };
 
 const gameSlice = createSlice({
@@ -57,8 +59,12 @@ const gameSlice = createSlice({
       if (cell !== -1) state.gridGame[cell].val = mark;
       state.currMark = state.currMark === "X" ? "0" : "X";
     },
+    setIsPending: (state: GameStateType, action: PayloadAction<boolean>) => {
+      state.isPending = action.payload;
+    },
   },
 });
 
-export const { setCurrMark, setUserMark, addMark } = gameSlice.actions;
+export const { setCurrMark, setUserMark, addMark, setIsPending } =
+  gameSlice.actions;
 export default gameSlice.reducer;

@@ -10,9 +10,10 @@ type PropsType = {
   currMark: MarkType;
   val: MarkType | null;
   handleClick: () => void;
+  fakeHover: boolean;
 };
 
-const Cell: FC<PropsType> = ({ currMark, val, handleClick }) => {
+const Cell: FC<PropsType> = ({ currMark, val, handleClick, fakeHover }) => {
   const [isHover, setIsHover] = useState(false);
 
   // clearStorage();
@@ -33,7 +34,7 @@ const Cell: FC<PropsType> = ({ currMark, val, handleClick }) => {
             ) : (
               <img src={assetsApp.__0__game_fill} alt="" />
             )
-          ) : isHover ? (
+          ) : isHover || fakeHover ? (
             currMark === "X" ? (
               <img src={assetsApp.__x__game_empty} alt="" />
             ) : (
