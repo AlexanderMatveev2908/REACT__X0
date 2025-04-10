@@ -6,7 +6,7 @@ const MainLayout: FC = () => {
   return (
     <div
       className="w-full min-h-screen app__container"
-      {...setStyle({ color: "var(--white__1)" })}
+      {...setStyle({ color: "var(--white__2)" })}
     >
       <Outlet />
     </div>

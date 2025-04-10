@@ -17,6 +17,7 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   --orange__0: #ffaa00;
   --white__0: #fff;
   --white__1: whitesmoke;
+  --white__2: #d6ecff;
 
   --blue_sc__0: #d6ecff;
   --blue_sc__1: #325471;
@@ -27,6 +28,8 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   --bg__0: #0c2233;
   --bg__1: #0e2c42;
   --bg__3: #091a27;
+
+  --place: #325471;
 }
 
 /* TEXT */
@@ -91,6 +94,10 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 }
 /* 🎉🎉🎉🎉 */
 
+input[type="text"]:placeholder-shown {
+  color: var(--place);
+}
+
 /* UTILS SHADOW*/
 
 .el__card_bg {
@@ -104,6 +111,11 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   z-index: 100;
   appearance: none;
 }
+.el__turn_mark {
+  @apply relative rounded-[15px];
+  background-color: var(--bg__1);
+  z-index: 100;
+}
 .el__btn_bg:enabled:hover {
   background-color: var(--blue_pr__0);
 }
@@ -113,12 +125,18 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   background-color: var(--bg__3);
   z-index: 50;
 }
+.el__turn_shadow {
+  @apply min-h-[107.5%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
 .el__card_shadow {
   @apply min-h-[105%];
   background-color: var(--blue_sc__2);
   z-index: 50;
 }
 .el__card_shadow,
-.el__btn_bg_shadow {
+.el__btn_bg_shadow,
+.el__turn_shadow {
   @apply absolute inset-0 rounded-[15px] w-full;
 }

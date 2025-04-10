@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { setStyle } from "../../../lib/styleSetter";
-import { v4 } from "uuid";
 import ButtonMarkWrapper from "./ButtonMarkWrapper";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { MarkFormType, MarkType } from "../PickMark";
+import MiniX from "../../../components/MiniMarks/MiniX";
+import Mini0 from "../../../components/MiniMarks/Mini0";
 
 type PropsType = {
   setValue: UseFormSetValue<MarkFormType>;
@@ -11,8 +12,6 @@ type PropsType = {
 };
 
 const ButtonsMark: FC<PropsType> = ({ setValue, watch }) => {
-  const [idsX] = useState<string[]>(Array.from({ length: 2 }, () => v4()));
-
   const currMark = watch("mark");
 
   const handleClick = (val: MarkType) =>
@@ -31,33 +30,19 @@ const ButtonsMark: FC<PropsType> = ({ setValue, watch }) => {
           handleClick: () => handleClick("X"),
         }}
       >
-        {idsX.map((id, i) => (
-          <div
-            key={id}
-            className={`min-h-[37px] min-w-[10px] bg-white CENTER_A_DIV😎 rounded-[3px] ${
-              !i ? "rotate-45" : "-rotate-45"
-            }`}
-          ></div>
-        ))}
+        <MiniX />
       </ButtonMarkWrapper>
 
       <ButtonMarkWrapper
         {...{
           inlineStyle: setStyle({
-            backgroundColor: "var(--white__0)",
+            backgroundColor: "var(--white__2)",
           }),
           handleClick: () => handleClick("0"),
           classStyle: `${currMark === "0" ? "scale-90" : "scale-100"}`,
         }}
       >
-        <div
-          className="absolute CENTER_A_DIV😎 min-w-full min-h-full rounded-full z-10"
-          {...setStyle({ backgroundColor: "var(--bg__0)" })}
-        ></div>
-        <div
-          className="CENTER_A_DIV😎 min-w-[13px] min-h-[13px] rounded-full z-20"
-          {...setStyle({ backgroundColor: "var(--white__0)" })}
-        ></div>
+        <Mini0 />
       </ButtonMarkWrapper>
     </div>
   );
