@@ -2,7 +2,7 @@ import { FC } from "react";
 import WrapperCardHome from "../../components/WrapperCardHome";
 import ElementShadow from "../../components/ElementShadow";
 import Title from "../../components/Title";
-import ButtonsMark from "../../components/ButtonsMark";
+import ButtonsMark from "../../components/ButtonsMark/ButtonsMark";
 import ButtonBasic from "../../components/HOC/ButtonBasic";
 
 const PickMark: FC = () => {
