@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { RootStateType } from "../../store/store";
-import Auth from "../../features/Home/Auth";
+import Auth from "../../features/Auth/Auth";
 import PickMark from "../../features/PickMark/PickMark";
 
 const HomePage: FC = () => {
