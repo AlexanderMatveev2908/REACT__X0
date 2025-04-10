@@ -58,6 +58,7 @@ const gameSlice = createSlice({
       );
       if (cell !== -1) state.gridGame[cell].val = mark;
       state.currMark = state.currMark === "X" ? "0" : "X";
+      if (state.user.mark === mark) state.isPending = true;
     },
     setIsPending: (state: GameStateType, action: PayloadAction<boolean>) => {
       state.isPending = action.payload;

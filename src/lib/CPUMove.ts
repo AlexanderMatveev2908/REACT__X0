@@ -4,15 +4,7 @@ import { GameStateType } from "../features/Game/gameSlice";
 export const makeRandom = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
-// export const makeCPUMove = (gameState: GameStateType) => {
-//   const indexTarget = makeRandom(0, gameState.gridGame.length - 1);
-//   if (typeof gameState.gridGame[indexTarget].val !== "object")
-//     makeCPUMove(gameState);
-
-//   return gameState.gridGame[indexTarget];
-// };
-
-export const makeCPUMove = (
+export const makeFakeMoveCPU = (
   gameState: GameStateType,
   lastMove?: number | null
 ) => {
@@ -27,4 +19,14 @@ export const makeCPUMove = (
   } while (!isValid);
 
   return i;
+};
+
+export const makeMoveCPU = (gameState: GameStateType) => {
+  const filtered = gameState.gridGame.filter(
+    (el) => typeof el.val === "object"
+  );
+
+  return filtered.length <= 1
+    ? filtered[0]
+    : filtered[makeRandom(0, filtered.length - 1)];
 };
