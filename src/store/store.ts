@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "../features/Home/authSLice";
+import authReducer from "../features/Auth/authSLice";
 
 const store = configureStore({
   reducer: {
