@@ -99,6 +99,7 @@ input[type="text"]:placeholder-shown {
 }
 
 /* UTILS SHADOW*/
+/*  */
 
 .el__card_bg {
   @apply relative gap-[30px] w-full p-[30px] grid items-start rounded-[15px];
