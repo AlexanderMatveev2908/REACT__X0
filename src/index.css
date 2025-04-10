@@ -22,6 +22,8 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   --blue_sc__2: #091a27;
   --blue_sc__3: #122d41;
   --blue_sc__4: #0f283c;
+
+  --bg__0: #0c2233;
 }
 
 /* TEXT */
@@ -68,4 +70,10 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 .txt__btn_lg,
 .txt__f {
   @apply leading-[auto];
+}
+
+/* GENERAL */
+
+.app__container {
+  background: var(--bg__0);
 }
