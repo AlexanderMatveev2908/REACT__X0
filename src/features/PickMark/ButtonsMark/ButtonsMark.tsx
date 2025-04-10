@@ -2,37 +2,21 @@ import { FC, useState } from "react";
 import { setStyle } from "../../../lib/styleSetter";
 import { v4 } from "uuid";
 import ButtonMarkWrapper from "./ButtonMarkWrapper";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { UseFormSetValue, UseFormWatch } from "react-hook-form";
+import { MarkFormType, MarkType } from "../PickMark";
 
-// tsc will treat vals literally not as string[]
-const markVals = ["X", "0"] as const;
-// extract vals with index being them array, res is an union type
-export type MarkType = (typeof markVals)[number];
+type PropsType = {
+  setValue: UseFormSetValue<MarkFormType>;
+  watch: UseFormWatch<MarkFormType>;
+};
 
-const schema = z.object({
-  mark: z.enum(markVals),
-});
-
-export type MarkFormType = z.infer<typeof schema>;
-
-const ButtonsMark: FC = () => {
+const ButtonsMark: FC<PropsType> = ({ setValue, watch }) => {
   const [idsX] = useState<string[]>(Array.from({ length: 2 }, () => v4()));
-
-  const { setValue, watch } = useForm<MarkFormType>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      mark: "0",
-    },
-  });
 
   const currMark = watch("mark");
 
   const handleClick = (val: MarkType) =>
     currMark === val ? null : setValue("mark", val, { shouldValidate: true });
-
-  console.log(currMark);
 
   return (
     <div

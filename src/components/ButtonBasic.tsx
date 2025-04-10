@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ElementShadow from "../ElementShadow";
+import ElementShadow from "./ElementShadow";
 
 type PropsType = {
   label: string;
