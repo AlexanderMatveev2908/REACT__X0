@@ -3,6 +3,7 @@ import { setStyle } from "../../lib/styleSetter";
 import ElementShadow from "../../components/ElementShadow";
 
 const AuthForm: FC = () => {
+  // ss
   return (
     <form className="w-full grid gap-[30px]">
       <ElementShadow
