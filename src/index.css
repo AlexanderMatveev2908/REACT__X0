@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* 
+IMPORTANT: for some practical reasons i prefer using snake case instead of kebab case in css naming, but only because i am working just myself on this project, if i would have been in a team i would have followed conventions of css or those one established by team   
+*/
+
+* {
+  font-family: "Bungee";
+}
+
+/* COLORS */
+
+:root {
+  --blue_pr__0: #38a3ff;
+  --blue_pr__1: #008aff;
+
+  --orange__0: #ffaa00;
+  --white__0: #fff;
+
+  --blue_sc__0: #d6ecff;
+  --blue_sc__1: #325471;
+  --blue_sc__2: #091a27;
+  --blue_sc__3: #122d41;
+  --blue_sc__4: #0f283c;
+}
+
+/* TEXT */
+
+.txt__h_sm {
+  @apply text-[18px] tracking-[1px];
+}
+.txt__h_md {
+  @apply text-[26px] tracking-[1.5px];
+}
+.txt__h_lg {
+  @apply text-[42px] tracking-[2.5px];
+}
+.txt__h_sm,
+.txt__h_md,
+.txt__h_lg {
+  @apply font-[800];
+}
+
+.txt__b {
+  @apply text-[16px] tracking-[0.8px] font-[500];
+}
+
+.txt__btn_md {
+  @apply text-[16px] tracking-[1px];
+}
+.txt__btn_lg {
+  @apply text-[20px] tracking-[1.25px];
+}
+.txt__btn_md,
+.txt__btn_lg {
+  @apply font-[800];
+}
+
+.txt__f {
+  @apply text-[20px] tracking-[1.25px] font-[800];
+}
+
+.txt__h_sm,
+.txt__h_md,
+.txt__h_lg,
+.txt__b,
+.txt__btn_md,
+.txt__btn_lg,
+.txt__f {
+  @apply leading-[auto];
+}
