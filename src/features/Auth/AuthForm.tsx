@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { setStyle } from "../../lib/styleSetter";
 import ElementShadow from "../../components/ElementShadow";
 import { z } from "zod";
@@ -21,8 +21,9 @@ const schema = z.object({
 type FormAuthType = z.infer<typeof schema>;
 
 const AuthForm: FC = () => {
-  const dispatch: DispatchType = useDispatch();
+  const [prevErr, setPrevErr] = useState<string | null>(null);
 
+  const dispatch: DispatchType = useDispatch();
   const {
     register,
     formState: { errors },
@@ -36,6 +37,10 @@ const AuthForm: FC = () => {
       name: null,
     },
   });
+
+  useEffect(() => {
+    if (errors?.name?.message) setPrevErr(errors?.name?.message);
+  }, [errors]);
 
   const handleSave = handleSubmit((formData) => {
     reset();
@@ -75,11 +80,13 @@ const AuthForm: FC = () => {
               className={`absolute border-2 border-red-600 text-red-600 rounded-xl right-0 -top-5 py-1 px-3 transition-all duration-300  ${
                 errors?.name?.message
                   ? "opacity-100"
-                  : "opacity-0 translate-y-[50px] min-w-[150px] min-h-[30px]"
+                  : "opacity-0 translate-y-[50px]"
               }`}
               {...setStyle({ backgroundColor: "var(--blue_sc__2)" })}
             >
-              <span className="text-xs">{errors?.name?.message}</span>
+              <span className="text-xs">
+                {errors?.name?.message ?? prevErr}
+              </span>
             </div>
             <input
               autoFocus={true}
