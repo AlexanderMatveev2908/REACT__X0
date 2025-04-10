@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { DispatchType } from "../../store/store";
 import { setUser } from "./authSLice";
 import Title from "../../components/Title";
+import ButtonBasic from "../../components/HOC/ButtonBasic";
 
 const schema = z.object({
   name: z
@@ -101,19 +102,12 @@ const AuthForm: FC = () => {
         </div>
       </ElementShadow>
 
-      <ElementShadow
+      <ButtonBasic
         {...{
-          styleShadow: "el__btn_bg_shadow",
+          label: "LET'S START",
+          isDisabled: !watch("name")?.trim() || !!errors?.name?.message,
         }}
-      >
-        <button
-          disabled={!watch("name") || !!errors?.name?.message}
-          type="submit"
-          className="el__btn_bg rounded-[15px]"
-        >
-          <span className="txt__btn_lg">LET'S START</span>
-        </button>
-      </ElementShadow>
+      />
     </form>
   );
 };
