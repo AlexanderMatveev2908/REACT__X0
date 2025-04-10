@@ -26,6 +26,7 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 
   --bg__0: #0c2233;
   --bg__1: #0e2c42;
+  --bg__3: #091a27;
 }
 
 /* TEXT */
@@ -92,15 +93,18 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   z-index: 100;
 }
 .el__btn_bg {
-  @apply relative min-w-full h-full flex justify-center items-center enabled:cursor-pointer min-h-[67px];
+  @apply relative min-w-full h-full flex justify-center items-center enabled:cursor-pointer min-h-[67px] transition-all duration-300;
   background-color: var(--blue_pr__1);
   z-index: 100;
   appearance: none;
 }
+.el__btn_bg:enabled:hover {
+  background-color: var(--blue_pr__0);
+}
 
 .el__btn_bg_shadow {
   @apply min-h-[115%];
-  background-color: var(--blue_sc__2);
+  background-color: var(--bg__3);
   z-index: 50;
 }
 .el__card_shadow {

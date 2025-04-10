@@ -1,16 +1,12 @@
 import { FC } from "react";
-import { assetsApp } from "../../assets/assets";
 import AuthForm from "./AuthForm";
+import WrapperCardHome from "../../components/WrapperCardHome";
 
 const Auth: FC = () => {
   return (
-    <div className="w-[460px] h-fit grid items-start gap-[30px]">
-      <div className="justify-self-center w-[74.65px] h-[35.75px]">
-        <img src={assetsApp.__logo} alt="logo" className="w-full h-full" />
-      </div>
-
+    <WrapperCardHome>
       <AuthForm />
-    </div>
+    </WrapperCardHome>
   );
 };
 export default Auth;
