@@ -5,6 +5,9 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { REG_NAME } from "../../config/regex";
+import { useDispatch } from "react-redux";
+import { DispatchType } from "../../store/store";
+import { setUser } from "./authSLice";
 
 const schema = z.object({
   name: z
@@ -18,10 +21,13 @@ const schema = z.object({
 type FormAuthType = z.infer<typeof schema>;
 
 const AuthForm: FC = () => {
+  const dispatch: DispatchType = useDispatch();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
     // watch,
   } = useForm<FormAuthType>({
     mode: "onChange",
@@ -32,7 +38,10 @@ const AuthForm: FC = () => {
   });
 
   const handleSave = handleSubmit((formData) => {
-    console.log(formData);
+    reset();
+    sessionStorage.setItem("user", formData.name as string);
+
+    dispatch(setUser(formData.name as string));
   });
 
   return (
