@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MarkType } from "../PickMark/PickMark";
+import { v4 } from "uuid";
+
+export interface CellType {
+  val: MarkType | null;
+  id: string;
+}
 
 interface PlayerType {
   mark: MarkType;
@@ -9,6 +15,7 @@ export interface GameStateType {
   user: PlayerType;
   CPU: PlayerType;
   currMark: MarkType;
+  gridGame: CellType[];
 }
 
 const savedData = sessionStorage.getItem("gameState");
@@ -24,6 +31,7 @@ const initState: GameStateType = savedData
         score: 0,
       },
       currMark: "X",
+      gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
     };
 
 const gameSlice = createSlice({
@@ -37,8 +45,20 @@ const gameSlice = createSlice({
       state.user.mark = action.payload;
       state.CPU.mark = action.payload === "X" ? "0" : "X";
     },
+    addMark: (
+      state: GameStateType,
+      action: PayloadAction<{ id: string; mark: MarkType }>
+    ) => {
+      const { id, mark } = action.payload;
+
+      const cell = state.gridGame.findIndex(
+        (el) => el.id === id && typeof el.val === "object"
+      );
+      if (cell !== -1) state.gridGame[cell].val = mark;
+      state.currMark = state.currMark === "X" ? "0" : "X";
+    },
   },
 });
 
-export const { setCurrMark, setUserMark } = gameSlice.actions;
+export const { setCurrMark, setUserMark, addMark } = gameSlice.actions;
 export default gameSlice.reducer;

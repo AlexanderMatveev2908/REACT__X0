@@ -2,17 +2,25 @@ import { FC, useState } from "react";
 import ElementShadow from "../../../components/ElementShadow";
 import { MarkType } from "../../PickMark/PickMark";
 import { assetsApp } from "../../../assets/assets";
+// @ts-expect-error dummy tsc
+// eslint-disable-next-line
+import { clearStorage } from "../../../lib/clearData";
 
 type PropsType = {
   currMark: MarkType;
   val: MarkType | null;
+  handleClick: () => void;
 };
 
-const Cell: FC<PropsType> = ({ currMark, val }) => {
+const Cell: FC<PropsType> = ({ currMark, val, handleClick }) => {
   const [isHover, setIsHover] = useState(false);
 
+  // clearStorage();
   return (
-    <div className="w-[140px] min-h-[140px] cursor-pointer">
+    <div
+      onClick={handleClick}
+      className="w-[140px] min-h-[140px] cursor-pointer"
+    >
       <ElementShadow {...{ styleShadow: "el__shadow_sm" }}>
         <div
           onMouseOver={() => setIsHover(true)}
