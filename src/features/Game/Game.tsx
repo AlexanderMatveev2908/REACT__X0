@@ -9,11 +9,11 @@ const Game: FC = () => {
 
   return (
     <div className="min-w-[460px] grid gap-[30px] items-start max-h-fit">
-      <Header {...{ currMark: gameState.currMark }} />
+      <div className="px-[5px]">
+        <Header {...{ currMark: gameState.currMark }} />
+      </div>
       <MainContent />
     </div>
   );
 };
 export default Game;
-
-//
