@@ -3,7 +3,6 @@ import { setStyle } from "../../lib/styleSetter";
 import ElementShadow from "../../components/ElementShadow";
 
 const AuthForm: FC = () => {
-  // ss
   return (
     <form className="w-full grid gap-[30px]">
       <ElementShadow
@@ -11,7 +10,7 @@ const AuthForm: FC = () => {
           styleShadow: "el__card_shadow",
         }}
       >
-        <div className="gap-[30px] w-full p-[30px] grid items-start rounded-[15px] el__card_bg">
+        <div className="el__card_bg">
           <div className="w-full flex justify-center">
             <span className="txt__h__sm">Let us know more about you</span>
           </div>
@@ -31,10 +30,7 @@ const AuthForm: FC = () => {
           styleShadow: "el__btn_bg_shadow",
         }}
       >
-        <button
-          type="submit"
-          className="min-w-full h-full flex justify-center items-center btn__clear cursor-pointer min-h-[67px] el__btn_bg rounded-[15px]"
-        >
+        <button type="submit" className="el__btn_bg rounded-[15px]">
           <span className="txt__btn_lg">LET'S START</span>
         </button>
       </ElementShadow>

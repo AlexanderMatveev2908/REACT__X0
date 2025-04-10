@@ -87,14 +87,15 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 /* UTILS SHADOW*/
 
 .el__card_bg {
-  @apply relative;
+  @apply relative gap-[30px] w-full p-[30px] grid items-start rounded-[15px];
   background-color: var(--bg__1);
   z-index: 100;
 }
 .el__btn_bg {
-  @apply relative;
+  @apply relative min-w-full h-full flex justify-center items-center cursor-pointer min-h-[67px];
   background-color: var(--blue_pr__1);
   z-index: 100;
+  appearance: none;
 }
 
 .el__btn_bg_shadow {
