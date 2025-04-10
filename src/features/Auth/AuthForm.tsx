@@ -7,12 +7,10 @@ const AuthForm: FC = () => {
     <form className="w-full grid gap-[30px]">
       <ElementShadow
         {...{
-          styleCard: "p-[30px] grid items-start rounded-[15px]",
-          styleBg: "el__card_bg",
           styleShadow: "el__card_shadow",
         }}
       >
-        <div className="el__content grid gap-[30px] items-start">
+        <div className="gap-[30px] w-full p-[30px] grid items-start rounded-[15px] el__card_bg">
           <div className="w-full flex justify-center">
             <span className="txt__h__sm">Let us know more about you</span>
           </div>
@@ -29,14 +27,12 @@ const AuthForm: FC = () => {
 
       <ElementShadow
         {...{
-          styleCard: "min-h-[67px]",
-          styleBg: "el__btn_bg",
           styleShadow: "el__btn_bg_shadow",
         }}
       >
         <button
           type="submit"
-          className="min-w-full h-full flex justify-center items-center btn__clear cursor-pointer el__content"
+          className="min-w-full h-full flex justify-center items-center btn__clear cursor-pointer min-h-[67px] el__btn_bg rounded-[15px]"
         >
           <span className="txt__btn_lg">LET'S START</span>
         </button>
