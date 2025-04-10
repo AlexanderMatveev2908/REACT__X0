@@ -18,6 +18,7 @@ const AuthForm: FC = () => {
           </div>
 
           <input
+            autoFocus={true}
             type="text"
             className="w-full outline-0 rounded-[15px] p-[15px] txt__f"
             {...setStyle({ backgroundColor: "var(--bg__0)" })}
@@ -26,10 +27,16 @@ const AuthForm: FC = () => {
         </div>
       </ElementShadow>
 
-      <ElementShadow {...{ styleCard: "" }}>
+      <ElementShadow
+        {...{
+          styleCard: "min-h-[67px]",
+          styleBg: "el__btn_bg",
+          styleShadow: "el__btn_bg_shadow",
+        }}
+      >
         <button
           type="submit"
-          className="w-full flex justify-center items-center btn__clear relative"
+          className="min-w-full h-full flex justify-center items-center btn__clear cursor-pointer el__content"
         >
           <span className="txt__btn_lg">LET'S START</span>
         </button>

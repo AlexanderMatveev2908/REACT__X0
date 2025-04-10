@@ -87,12 +87,25 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 /* UTILS SHADOW*/
 
 .el__content {
+  @apply relative;
   z-index: 150;
 }
+
 .el__card_bg {
   @apply h-full;
   background-color: var(--bg__1);
   z-index: 100;
+}
+.el__btn_bg {
+  @apply h-full;
+  background-color: var(--blue_pr__1);
+  z-index: 100;
+}
+
+.el__btn_bg_shadow {
+  @apply min-h-[115%];
+  background-color: var(--blue_sc__2);
+  z-index: 50;
 }
 .el__card_shadow {
   @apply min-h-[105%];
@@ -100,6 +113,8 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   z-index: 50;
 }
 .el__card_bg,
-.el__card_shadow {
+.el__card_shadow,
+.el__btn_bg,
+.el__btn_bg_shadow {
   @apply absolute inset-0 rounded-[15px] w-full;
 }
