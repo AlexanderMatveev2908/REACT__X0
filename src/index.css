@@ -99,15 +99,13 @@ input[type="text"]:placeholder-shown {
 }
 
 /* UTILS SHADOW */
-.el__card_bg,
-.el__turn_mark,
-.el__refresh,
-.el__btn_bg {
-  @apply relative rounded-[15px];
-}
 
 .el__card_bg {
   @apply gap-[30px] w-full p-[30px] grid items-start;
+  background-color: var(--bg__1);
+  z-index: 100;
+}
+.el__cell {
   background-color: var(--bg__1);
   z-index: 100;
 }
@@ -126,6 +124,14 @@ input[type="text"]:placeholder-shown {
 }
 .el__btn_bg:enabled:hover {
   background-color: var(--blue_pr__0);
+}
+
+.el__card_bg,
+.el__turn_mark,
+.el__refresh,
+.el__btn_bg,
+.el__cell {
+  @apply relative rounded-[15px];
 }
 
 .el__shadow_sm {
@@ -148,6 +154,7 @@ input[type="text"]:placeholder-shown {
   background-color: var(--bg__3);
   z-index: 50;
 }
+
 .el__shadow_sm,
 .el__shadow_xl,
 .el__shadow_md,
