@@ -92,7 +92,7 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   z-index: 100;
 }
 .el__btn_bg {
-  @apply relative min-w-full h-full flex justify-center items-center cursor-pointer min-h-[67px];
+  @apply relative min-w-full h-full flex justify-center items-center enabled:cursor-pointer min-h-[67px];
   background-color: var(--blue_pr__1);
   z-index: 100;
   appearance: none;
