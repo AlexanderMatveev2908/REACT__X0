@@ -85,6 +85,12 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   appearance: none;
 }
 
+/* 🎉🎉🎉🎉 */
+.CENTER_A_DIV😎 {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+/* 🎉🎉🎉🎉 */
+
 /* UTILS SHADOW*/
 
 .el__card_bg {
