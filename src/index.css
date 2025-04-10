@@ -25,6 +25,7 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   --blue_sc__4: #0f283c;
 
   --bg__0: #0c2233;
+  --bg__1: #0e2c42;
 }
 
 /* TEXT */
@@ -77,4 +78,25 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 
 .app__container {
   background: var(--bg__0);
+}
+
+/* UTILS */
+
+.el__content {
+  z-index: 150;
+  color: var(--white__1);
+}
+.el__bg {
+  @apply h-full;
+  background-color: var(--bg__1);
+  z-index: 100;
+}
+.el__shadow {
+  @apply min-h-[105%]  inset-0;
+  background-color: var(--blue_sc__2);
+  z-index: 50;
+}
+.el__bg,
+.el__shadow {
+  @apply absolute inset-0 rounded-[15px] w-full;
 }
