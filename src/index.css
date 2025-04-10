@@ -98,46 +98,59 @@ input[type="text"]:placeholder-shown {
   color: var(--place);
 }
 
-/* UTILS SHADOW*/
-/*  */
+/* UTILS SHADOW */
+.el__card_bg,
+.el__turn_mark,
+.el__refresh,
+.el__btn_bg {
+  @apply relative rounded-[15px];
+}
 
 .el__card_bg {
-  @apply relative gap-[30px] w-full p-[30px] grid items-start rounded-[15px];
+  @apply gap-[30px] w-full p-[30px] grid items-start;
   background-color: var(--bg__1);
+  z-index: 100;
+}
+.el__turn_mark {
+  background-color: var(--bg__1);
+  z-index: 100;
+}
+.el__refresh {
+  background-color: var(--white__2);
   z-index: 100;
 }
 .el__btn_bg {
-  @apply relative min-w-full h-full flex justify-center items-center enabled:cursor-pointer min-h-[67px] transition-all duration-300;
   background-color: var(--blue_pr__1);
   z-index: 100;
   appearance: none;
-}
-.el__turn_mark {
-  @apply relative rounded-[15px];
-  background-color: var(--bg__1);
-  z-index: 100;
 }
 .el__btn_bg:enabled:hover {
   background-color: var(--blue_pr__0);
 }
 
-.el__btn_bg_shadow {
-  @apply min-h-[115%];
-  background-color: var(--bg__3);
-  z-index: 50;
-}
-.el__turn_shadow {
-  @apply min-h-[107.5%];
-  background-color: var(--bg__3);
-  z-index: 50;
-}
-.el__card_shadow {
+.el__shadow_sm {
   @apply min-h-[105%];
   background-color: var(--blue_sc__2);
   z-index: 50;
 }
-.el__card_shadow,
-.el__btn_bg_shadow,
-.el__turn_shadow {
+.el__shadow_md {
+  @apply min-h-[107.5%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
+.el__shadow_lg {
+  @apply min-h-[112.5%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
+.el__shadow_xl {
+  @apply min-h-[115%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
+.el__shadow_sm,
+.el__shadow_xl,
+.el__shadow_md,
+.el__shadow_lg {
   @apply absolute inset-0 rounded-[15px] w-full;
 }
