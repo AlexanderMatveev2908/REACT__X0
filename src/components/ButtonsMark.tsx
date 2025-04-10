@@ -7,10 +7,10 @@ const ButtonsMark: FC = () => {
 
   return (
     <div
-      className="w-full min-w-[497px] grid grid-cols-2 min-h-[67px] rounded-[15px] overflow-hidden place-items-center p-[5px]"
+      className="w-full min-w-[400px] grid grid-cols-2 min-h-[67px] rounded-[15px] overflow-hidden place-items-center p-[5px]"
       {...setStyle({ backgroundColor: "var(--bg__0)" })}
     >
-      <div className="w-full min-h-full rounded-[15px] flex justify-center items-center">
+      <button className="w-full min-h-full rounded-[15px] flex justify-center items-center">
         <div className="relative min-w-[31.74px]] min-h-[31.74px]">
           {idsX.map((id, i) => (
             <div
@@ -21,8 +21,9 @@ const ButtonsMark: FC = () => {
             ></div>
           ))}
         </div>
-      </div>
-      <div
+      </button>
+
+      <button
         className="min-h-full w-full rounded-[15px] flex justify-center items-center"
         {...setStyle({ backgroundColor: "var(--white__0)" })}
       >
@@ -36,7 +37,7 @@ const ButtonsMark: FC = () => {
             {...setStyle({ backgroundColor: "var(--white__0)" })}
           ></div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };
