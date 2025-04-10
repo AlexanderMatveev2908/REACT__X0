@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MarkType } from "../PickMark/ButtonsMark/ButtonsMark";
+import { MarkType } from "../PickMark/PickMark";
 
 interface PlayerType {
   mark: MarkType;
@@ -33,8 +33,12 @@ const gameSlice = createSlice({
     setCurrMark: (state: GameStateType, action: PayloadAction<MarkType>) => {
       state.currMark = action.payload;
     },
+    setUserMark: (state: GameStateType, action: PayloadAction<MarkType>) => {
+      state.user.mark = action.payload;
+      state.CPU.mark = action.payload === "X" ? "0" : "X";
+    },
   },
 });
 
-export const { setCurrMark } = gameSlice.actions;
+export const { setCurrMark, setUserMark } = gameSlice.actions;
 export default gameSlice.reducer;

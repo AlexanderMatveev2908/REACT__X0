@@ -7,7 +7,7 @@ type PropsType = {
 
 const ElementShadow: FC<PropsType> = ({ styleShadow, children }) => {
   return (
-    <div className={`w-full relative`}>
+    <div className="w-full relative">
       <div className={styleShadow}></div>
 
       {children}

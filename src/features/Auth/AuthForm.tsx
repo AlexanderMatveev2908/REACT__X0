@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { DispatchType } from "../../store/store";
 import { setUser } from "./authSLice";
 import Title from "../../components/Title";
-import ButtonBasic from "../../components/HOC/ButtonBasic";
+import ButtonBasic from "../../components/ButtonBasic";
 
 const schema = z.object({
   name: z
