@@ -41,7 +41,7 @@ const PickMark: FC = () => {
   return (
     <WrapperCardHome>
       <form onSubmit={handleSave} className="w-full grid gap-[30px]">
-        <ElementShadow {...{ styleShadow: "el__card_shadow" }}>
+        <ElementShadow {...{ styleShadow: "el__shadow_sm" }}>
           <div className="el__card_bg">
             <Title {...{ title: "PICK YOUR MARK AS PLAYER" }} />
 

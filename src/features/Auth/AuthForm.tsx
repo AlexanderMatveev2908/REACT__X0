@@ -55,7 +55,7 @@ const AuthForm: FC = () => {
     <form onSubmit={handleSave} className="w-full grid gap-[30px]">
       <ElementShadow
         {...{
-          styleShadow: "el__card_shadow",
+          styleShadow: "el__shadow_sm",
         }}
       >
         <div className="el__card_bg">
