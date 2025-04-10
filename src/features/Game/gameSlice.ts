@@ -5,7 +5,7 @@ interface PlayerType {
   mark: MarkType;
   score: number;
 }
-interface GameStateType {
+export interface GameStateType {
   user: PlayerType;
   CPU: PlayerType;
   currMark: MarkType;

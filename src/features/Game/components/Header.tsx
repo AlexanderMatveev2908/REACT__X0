@@ -30,13 +30,13 @@ const Header: FC<PropsType> = ({ currMark }) => {
         </ElementShadow>
       </div>
 
-      <div className="w-fit flex justify-self-end min-h-[52px]">
+      <button className="w-fit flex justify-self-end min-h-[52px] cursor-pointer">
         <ElementShadow {...{ styleShadow: "el__shadow_lg" }}>
           <div className="el__refresh min-h-[52px] px-[30px] flex justify-center items-center">
             <img src={assetsApp.__refresh} alt="" />
           </div>
         </ElementShadow>
-      </div>
+      </button>
     </div>
   );
 };

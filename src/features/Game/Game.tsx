@@ -12,7 +12,7 @@ const Game: FC = () => {
       <div className="px-[5px]">
         <Header {...{ currMark: gameState.currMark }} />
       </div>
-      <MainContent />
+      <MainContent {...{ gameState }} />
     </div>
   );
 };
