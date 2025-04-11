@@ -22,6 +22,9 @@ const Game: FC = () => {
       if (typeof res === "string") dispatch(finishGame(res));
     };
     listenEndGame();
+
+    console.log(gameState);
+    console.log(clickRefCLear.current);
   }, [gameState, dispatch]);
 
   return (

@@ -49,7 +49,7 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   }, [gameState, dispatch, clickRefCLear]);
 
   const makeMoveCPUMemoized = useCallback(() => {
-    if (typeof clickRefCLear.current === "object") {
+    if (typeof clickRefCLear.current === "object" && !gameState.CPU.hasMoved) {
       clickRefCLear.current = false;
       dispatch(setIsPending(true));
       return;
