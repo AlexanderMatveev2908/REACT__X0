@@ -77,8 +77,28 @@ const gameSlice = createSlice({
       state.user.hasMoved = state.CPU.mark === "X";
       state.currMark = "X";
     },
+    partialRefreshStart: (state, action: PayloadAction<string[]>) => {
+      state.gridGame = Array.from({ length: 9 }, (_, i) => ({
+        id: action.payload[i],
+        val: null,
+      }));
+      state.isPending = false;
+      state.CPU.hasMoved = true;
+      state.user.hasMoved = true;
+      state.currMark = "X";
+    },
+    partialRefreshEnd: (state) => {
+      state.isPending = state.CPU.mark === "X";
+      state.CPU.hasMoved = state.CPU.mark === "0";
+    },
   },
 });
 
-export const { setUserMark, addMark, refresh } = gameSlice.actions;
+export const {
+  setUserMark,
+  addMark,
+  refresh,
+  partialRefreshStart,
+  partialRefreshEnd,
+} = gameSlice.actions;
 export default gameSlice.reducer;

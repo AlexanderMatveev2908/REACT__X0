@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { setUserMark } from "../Game/gameSlice";
+import { saveStorage } from "../../lib/storage";
 
 // tsc will treat vals literally not as string[]
 const markVals = ["X", "0"] as const;
@@ -46,12 +47,13 @@ const PickMark: FC = () => {
       },
       CPU: {
         ...gameState.CPU,
-        mark: formData.mark === "X" ? "0" : "X",
+        mark: formData.mark === "X" ? ("0" as MarkType) : ("X" as MarkType),
         hasMoved: formData.mark === "X",
       },
       isPending: formData.mark === "0",
     };
-    sessionStorage.setItem("gameState", JSON.stringify(updatedState));
+
+    saveStorage(updatedState);
 
     navigate("/game");
   });
