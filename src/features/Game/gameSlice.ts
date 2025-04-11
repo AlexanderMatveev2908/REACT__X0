@@ -67,6 +67,9 @@ const gameSlice = createSlice({
 
       state.currMark = state.currMark === "X" ? "0" : "X";
     },
+    setIsPending: (state, action: PayloadAction<boolean>) => {
+      state.isPending = action.payload;
+    },
     refresh: (state, action: PayloadAction<string[]>) => {
       state.gridGame = Array.from({ length: 9 }, (_, i) => ({
         id: action.payload[i],
@@ -100,5 +103,6 @@ export const {
   refresh,
   partialRefreshStart,
   partialRefreshEnd,
+  setIsPending,
 } = gameSlice.actions;
 export default gameSlice.reducer;

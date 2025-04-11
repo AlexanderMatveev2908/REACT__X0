@@ -20,21 +20,14 @@ type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
   clickRefreshRef: React.RefObject<boolean>;
-  hasEffectRun: React.RefObject<boolean>;
 };
 
-const Header: FC<PropsType> = ({
-  gameState,
-  dispatch,
-  clickRefreshRef,
-  hasEffectRun,
-}) => {
+const Header: FC<PropsType> = ({ gameState, dispatch, clickRefreshRef }) => {
   const handleCLick = () => {
     clickRefreshRef.current = true;
 
     if (gameState.user.mark === "X") {
       dispatch(refresh(refreshStorage(gameState)));
-      hasEffectRun.current = false;
     } else {
       dispatch(partialRefreshStart(partialRefreshStorageStart(gameState)));
     }
