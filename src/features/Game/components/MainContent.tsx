@@ -8,7 +8,7 @@ import { storageMove } from "../../../lib/storage";
 type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
-  clickRefCLear: React.RefObject<boolean>;
+  clickRefCLear: React.RefObject<boolean | null>;
 };
 
 const getLenEmpty = (gameState: GameStateType) =>
@@ -40,12 +40,17 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   }, [gameState, dispatch, clickRefCLear]);
 
   const makeMoveCPUMemoized = useCallback(() => {
-    if (
+    if (typeof clickRefCLear.current === "object") {
+      clickRefCLear.current = false;
+      dispatch(setIsPending(true));
+      return;
+    } else if (
       !getLenEmpty(gameState) ||
       gameState.isPending ||
       gameState.CPU.hasMoved
-    )
+    ) {
       return;
+    }
 
     const move = makeMoveCPU(gameState).id;
     storageMove(gameState, move);
