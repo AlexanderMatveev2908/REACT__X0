@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { assetsApp } from "../../../assets/assets";
 import ElementShadow from "../../../components/ElementShadow";
 import Logo from "../../../components/Logo";
@@ -33,6 +33,12 @@ const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
     );
   };
 
+  const plainCells = useMemo(
+    () =>
+      gameState.gridGame.filter((cell) => typeof cell.val === "string").length,
+    [gameState]
+  );
+
   return (
     <div className="w-full grid grid-cols-3 items-center">
       <div className="w-full flex justify-start items-center">
@@ -55,8 +61,9 @@ const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
       </div>
 
       <button
+        disabled={!plainCells}
         onClick={handleCLick}
-        className="w-fit flex justify-self-end min-h-[52px] cursor-pointer transition-all duration-300 hover:scale-110"
+        className="w-fit disabled:opacity-50 flex justify-self-end min-h-[52px] enabled:cursor-pointer transition-all duration-300 enabled:hover:scale-110"
       >
         <ElementShadow {...{ styleShadow: "el__shadow_lg" }}>
           <div className="el__refresh min-h-[52px] px-[30px] flex justify-center items-center">
