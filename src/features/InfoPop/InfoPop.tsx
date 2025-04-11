@@ -14,16 +14,16 @@ const InfoPop: FC = () => {
   return (
     <div
       className={`inset-0 bg-black/50 flex justify-center items-center ${
-        !isObjOk(infoState.infoPop) ? "i__info_pop fixed" : "hidden"
+        isObjOk(infoState.infoPop) ? "i__info_pop fixed" : "hidden"
       }`}
     >
       <div
         className="p-[30px] grid justify-items-center min-w-[460px] rounded-[15px] gap-[30px] items-start"
         {...setStyle({ backgroundColor: "var(--bg__1)" })}
       >
-        <h1 className="txt__h_sm">ARE YOU SURE?</h1>
+        <h1 className="txt__h_sm">{infoState.infoPop?.headTxt}</h1>
 
-        <h1 className="txt__h_lg">RESTART GAME</h1>
+        <h1 className="txt__h_lg">{infoState.infoPop?.mainTxt}</h1>
 
         <div className="w-full grid grid-cols-2 gap-x-[15px]">
           {ids.map((id, i) => (
@@ -37,13 +37,22 @@ const InfoPop: FC = () => {
             >
               <ElementShadow {...{ styleShadow: "el__shadow_md" }}>
                 <button
+                  onClick={() =>
+                    !i
+                      ? infoState.infoPop?.leftBtnAction()
+                      : infoState.infoPop?.rightBtnAction()
+                  }
                   className={`${
                     !i ? "min-w-[100px]" : "min-w-[170px]"
                   } max-w-fit min-h-[52px] flex justify-center items-center px-[30px]  ${
                     !i ? style.btn__left : style.btn__right
                   }`}
                 >
-                  <span className="txt__btn_md">Quit</span>
+                  <span className="txt__btn_md">
+                    {!i
+                      ? infoState.infoPop?.leftBtn
+                      : infoState.infoPop?.rightBtn}
+                  </span>
                 </button>
               </ElementShadow>
             </div>

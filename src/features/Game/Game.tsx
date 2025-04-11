@@ -10,6 +10,7 @@ import MainContent from "./components/MainContent/MainContent";
 const Game: FC = () => {
   const dispatch: DispatchType = useDispatch();
   const gameState = useSelector((state: RootStateType) => state.game);
+  // children must share clickRef to sync about isPending state or flow will not work as expected
   const clickRefCLear = useRef<boolean | null>(false);
 
   useEffect(() => {

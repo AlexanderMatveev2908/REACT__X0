@@ -6,11 +6,7 @@ import {
   setIsPending,
 } from "../../gameSlice";
 import { DispatchType } from "../../../../store/store";
-import {
-  establishEndGame,
-  makeFakeMoveCPU,
-  makeMoveCPU,
-} from "../../../../lib/CPUMove";
+import { makeFakeMoveCPU, makeMoveCPU } from "../../../../lib/CPUMove";
 import { storageMove } from "../../../../lib/storage";
 import Cell from "./Cell";
 
@@ -34,15 +30,19 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
 
     if (getLenEmpty(gameState) > 1)
       do {
-        await new Promise<void>((res) => {
+        const shouldStop = await new Promise<boolean>((res) => {
           setTimeout(() => {
+            if (clickRefCLear.current) res(true);
+
             setFakeHover((prev) => makeFakeMoveCPU(gameState, prev));
 
             count++;
-            res();
+            res(false);
           }, 400);
         });
-      } while (count <= MAX_COUNT && !clickRefCLear.current);
+
+        if (shouldStop) break;
+      } while (count <= MAX_COUNT);
 
     setFakeHover(null);
     dispatch(setIsPending(false));
@@ -100,10 +100,6 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
 
     storageMove(gameState, el.id);
   };
-
-  useEffect(() => {
-    establishEndGame(gameState);
-  }, [gameState]);
 
   return (
     <div className="w-full grid grid-cols-3 gap-[10px]">

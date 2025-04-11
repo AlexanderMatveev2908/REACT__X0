@@ -6,6 +6,8 @@ export interface InfoPopType {
   leftBtn: string;
   rightBtn: string;
   mainTxt: string;
+  leftBtnAction: () => void;
+  rightBtnAction: () => void;
   icon?: MarkType;
 }
 

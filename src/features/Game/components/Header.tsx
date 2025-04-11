@@ -5,6 +5,7 @@ import Logo from "../../../components/Logo";
 import { DispatchType } from "../../../store/store";
 import { GameStateType, refresh } from "../gameSlice";
 import { refreshStorage } from "../../../lib/storage";
+import { closePop, openPop } from "../../InfoPop/infoPopSlice";
 
 type PropsType = {
   gameState: GameStateType;
@@ -14,9 +15,22 @@ type PropsType = {
 
 const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const handleCLick = () => {
-    clickRefCLear.current = gameState.CPU.mark === "X" ? null : true;
+    clickRefCLear.current = true;
 
-    dispatch(refresh(refreshStorage(gameState)));
+    dispatch(
+      openPop({
+        headTxt: "ARE YOU SURE?",
+        mainTxt: "RESTART GAME",
+        leftBtn: "NO, CANCEL",
+        rightBtn: "YES, RESTART",
+        leftBtnAction: () => dispatch(closePop()),
+        rightBtnAction: () => {
+          clickRefCLear.current = gameState.CPU.mark === "X" ? null : true;
+          dispatch(refresh(refreshStorage(gameState)));
+          dispatch(closePop());
+        },
+      })
+    );
   };
 
   return (
