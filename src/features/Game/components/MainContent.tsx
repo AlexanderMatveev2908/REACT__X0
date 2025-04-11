@@ -2,7 +2,11 @@ import { FC, useCallback, useEffect, useState } from "react";
 import Cell from "./Cell";
 import { addMark, CellType, GameStateType, setIsPending } from "../gameSlice";
 import { DispatchType } from "../../../store/store";
-import { makeFakeMoveCPU, makeMoveCPU } from "../../../lib/CPUMove";
+import {
+  establishEndGame,
+  makeFakeMoveCPU,
+  makeMoveCPU,
+} from "../../../lib/CPUMove";
 import { storageMove } from "../../../lib/storage";
 
 type PropsType = {
@@ -60,7 +64,7 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
         id: move,
       })
     );
-  }, [dispatch, gameState]);
+  }, [dispatch, gameState, clickRefCLear]);
 
   useEffect(() => {
     createThinker();
@@ -91,6 +95,10 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
 
     storageMove(gameState, el.id);
   };
+
+  useEffect(() => {
+    establishEndGame(gameState);
+  }, [gameState]);
 
   return (
     <div className="w-full grid grid-cols-3 gap-[10px]">

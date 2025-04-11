@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MarkType } from "../PickMark/PickMark";
 import { v4 } from "uuid";
+import { endGame } from "../../config/endGame";
 
 export interface CellType {
   val: MarkType | null;
@@ -12,10 +13,14 @@ interface PlayerType {
   score: number;
   hasMoved: boolean;
 }
+export type EndGameType = (typeof endGame)[number];
+
 export interface GameStateType {
   user: PlayerType;
   CPU: PlayerType;
+  ties: number;
   currMark: MarkType;
+  currWinner: EndGameType;
   gridGame: CellType[];
   isPending: boolean;
 }
@@ -35,6 +40,8 @@ const initState: GameStateType = savedData
         hasMoved: false,
       },
       currMark: "X",
+      currWinner: null,
+      ties: 0,
       gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
       isPending: false,
     };
@@ -94,10 +101,18 @@ const gameSlice = createSlice({
       state.isPending = state.CPU.mark === "X";
       state.CPU.hasMoved = state.CPU.mark === "0";
     },
+    finishGame: (state, action: PayloadAction<NonNullable<EndGameType>>) => {
+      state.currWinner = action.payload;
+
+      if (action.payload === "user") state.user.score++;
+      else if (action.payload === "CPU") state.CPU.score++;
+      else state.ties++;
+    },
   },
 });
 
 export const {
+  finishGame,
   setUserMark,
   addMark,
   refresh,
