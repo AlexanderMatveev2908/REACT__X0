@@ -59,7 +59,7 @@ export const establishEndGame = (gameState: GameStateType): EndGameType => {
   if (winner === null && vals.every((el) => typeof el?.val === "string"))
     winner = "tie";
 
-  if (typeof winner === "string") {
+  if (typeof winner === "string" && !gameState.isSuccess) {
     const newState: GameStateType = {
       ...gameState,
       isPending: false,

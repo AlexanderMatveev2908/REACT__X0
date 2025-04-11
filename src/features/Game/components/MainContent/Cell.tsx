@@ -1,14 +1,14 @@
 import { FC, useState } from "react";
-import ElementShadow from "../../../components/ElementShadow";
-import { MarkType } from "../../PickMark/PickMark";
-import { assetsApp } from "../../../assets/assets";
+import ElementShadow from "../../../../components/ElementShadow";
+import { MarkType } from "../../../PickMark/PickMark";
+import { assetsApp } from "../../../../assets/assets";
 // @ts-expect-error dummy tsc
 // eslint-disable-next-line
 import { clearStorage } from "../../../lib/clearData";
-import { GameStateType } from "../gameSlice";
-import MiniX from "../../../components/MiniMarks/MiniX";
-import { setStyle } from "../../../lib/styleSetter";
-import Mini0 from "../../../components/MiniMarks/Mini0";
+import { GameStateType } from "../../gameSlice";
+import MiniX from "../../../../components/MiniMarks/MiniX";
+import { setStyle } from "../../../../lib/styleSetter";
+import Mini0 from "../../../../components/MiniMarks/Mini0";
 
 type PropsType = {
   gameState: GameStateType;

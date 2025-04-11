@@ -2,9 +2,10 @@ import { FC, useEffect, useRef } from "react";
 import Header from "./components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootStateType } from "../../store/store";
-import MainContent from "./components/MainContent";
 import { establishEndGame } from "../../lib/CPUMove";
 import { finishGame } from "./gameSlice";
+import KeeperScore from "./components/KepperScore/KeeperScore";
+import MainContent from "./components/MainContent/MainContent";
 
 const Game: FC = () => {
   const dispatch: DispatchType = useDispatch();
@@ -13,7 +14,8 @@ const Game: FC = () => {
 
   useEffect(() => {
     const listenEndGame = () => {
-      if (typeof gameState.currWinner !== "object") return;
+      if (typeof gameState.currWinner !== "object" || gameState.isSuccess)
+        return;
 
       const res = establishEndGame(gameState);
       if (typeof res === "string") dispatch(finishGame(res));
@@ -28,6 +30,8 @@ const Game: FC = () => {
       </div>
 
       <MainContent {...{ gameState, dispatch, clickRefCLear }} />
+
+      <KeeperScore {...{ gameState }} />
     </div>
   );
 };
