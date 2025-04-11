@@ -27,6 +27,7 @@ const Game: FC = () => {
       <div className="px-[5px]">
         <Header {...{ gameState, dispatch, clickRefCLear }} />
       </div>
+
       <MainContent {...{ gameState, dispatch, clickRefCLear }} />
     </div>
   );

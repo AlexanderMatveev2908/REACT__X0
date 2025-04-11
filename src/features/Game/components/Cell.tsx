@@ -6,6 +6,9 @@ import { assetsApp } from "../../../assets/assets";
 // eslint-disable-next-line
 import { clearStorage } from "../../../lib/clearData";
 import { GameStateType } from "../gameSlice";
+import MiniX from "../../../components/MiniMarks/MiniX";
+import { setStyle } from "../../../lib/styleSetter";
+import Mini0 from "../../../components/MiniMarks/Mini0";
 
 type PropsType = {
   gameState: GameStateType;
@@ -48,9 +51,28 @@ const Cell: FC<PropsType> = ({
         >
           {typeof gameState.currWinner === "string" ? (
             val === "X" ? (
-              <img src={assetsApp.__x__game_empty} alt="" />
+              <div className="relative">
+                <MiniX
+                  {...{
+                    classesCustom: "min-h-[91px] min-w-[24px] z-60",
+                    inlineStyle: setStyle({ backgroundColor: "var(--bg__3)" }),
+                  }}
+                />
+              </div>
             ) : val === "0" ? (
-              <img src={assetsApp.__0__game_empty} alt="" />
+              <div className="relative h-[80px] w-[80px]">
+                <Mini0
+                  {...{
+                    classesCustomInner: "min-w-[32px] min-h-[32px]",
+                    inlineStyleOut: setStyle({
+                      backgroundColor: "var(--bg__3)",
+                    }),
+                    inlineStyleInner: setStyle({
+                      backgroundColor: "var(--orange__0)",
+                    }),
+                  }}
+                />
+              </div>
             ) : null
           ) : typeof val !== "object" ? (
             val === "X" ? (
