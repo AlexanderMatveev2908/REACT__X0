@@ -7,7 +7,7 @@ import MainContent from "./components/MainContent";
 const Game: FC = () => {
   const dispatch: DispatchType = useDispatch();
   const gameState = useSelector((state: RootStateType) => state.game);
-  const clickRefCLear = useRef<boolean>(false);
+  const clickRefCLear = useRef<boolean | null>(false);
 
   useEffect(() => {
     // console.log(gameState);

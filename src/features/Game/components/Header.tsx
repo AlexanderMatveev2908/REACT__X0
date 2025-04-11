@@ -9,12 +9,12 @@ import { refreshStorage } from "../../../lib/storage";
 type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
-  clickRefCLear: React.RefObject<boolean>;
+  clickRefCLear: React.RefObject<boolean | null>;
 };
 
 const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const handleCLick = () => {
-    clickRefCLear.current = true;
+    clickRefCLear.current = gameState.CPU.mark === "X" ? null : true;
 
     dispatch(refresh(refreshStorage(gameState)));
   };
