@@ -58,8 +58,7 @@ const Game: FC = () => {
     listenEndGame();
 
     console.log(gameState);
-    console.log(clickRefCLear.current);
-  }, [gameState, dispatch]);
+  }, [gameState, dispatch, navigate]);
 
   return (
     <div className="min-w-[460px] grid gap-[30px] items-start max-h-fit">
