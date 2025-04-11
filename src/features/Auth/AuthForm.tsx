@@ -91,7 +91,7 @@ const AuthForm: FC = () => {
             <input
               autoFocus={true}
               type="text"
-              className="w-full outline-0 rounded-[15px] p-[15px] txt__f cursor-pointer"
+              className="w-full outline-0 rounded-[15px] p-[15px] txt__f el__cursor"
               {...setStyle({ backgroundColor: "var(--bg__0)" })}
               placeholder="NAME"
               {...register("name", {
