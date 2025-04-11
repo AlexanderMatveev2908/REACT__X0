@@ -15,6 +15,7 @@ type PropsType = {
 const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const handleCLick = () => {
     clickRefCLear.current = true;
+
     dispatch(refresh(refreshStorage(gameState)));
   };
 
