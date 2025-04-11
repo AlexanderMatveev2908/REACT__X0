@@ -69,6 +69,7 @@ export const updateStoragePending = (gameState: GameStateType) => {
   const updated: GameStateType = {
     ...gameState,
     isPending: false,
+    isSuccess: false,
   };
 
   saveStorageGame(updated);
