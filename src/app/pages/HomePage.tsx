@@ -10,8 +10,7 @@ const HomePage: FC = () => {
   const gameState = useSelector((state: RootStateType) => state.game);
 
   const canStay =
-    gameState.gridGame.filter((el) => el.val === null).length === 9 &&
-    !gameState.isPending;
+    gameState.gridGame.filter((el) => el.val === null).length === 9;
 
   return !canStay ? (
     <Navigate to="/game" replace />

@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { GameStateType } from "../features/Game/gameSlice";
+import { EndGameType, GameStateType } from "../features/Game/gameSlice";
 import { MarkType } from "../features/PickMark/PickMark";
 import { AuthStateType } from "../features/Auth/authSLice";
 
@@ -63,6 +63,33 @@ export const storageMove = (gameState: GameStateType, move: string) => {
   };
 
   saveStorageGame(updatedStatus);
+
+  return updatedStatus;
+};
+
+export const finishGameStorage = (
+  gameState: GameStateType,
+  res: EndGameType
+) => {
+  const newState: GameStateType = {
+    ...gameState,
+    currWinner: res,
+    isPending: false,
+    isSuccess: true,
+    CPU: {
+      ...gameState.CPU,
+      hasMoved: true,
+      score: res === "user" ? gameState.user.score + 1 : gameState.user.score,
+    },
+    user: {
+      ...gameState.user,
+      hasMoved: true,
+      score: res === "CPU" ? gameState.CPU.score + 1 : gameState.CPU.score,
+    },
+    ties: res === "tie" ? gameState.ties + 1 : gameState.ties,
+  };
+
+  saveStorageGame(newState);
 };
 
 // export const updateStoragePending = (gameState: GameStateType) => {

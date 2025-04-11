@@ -2,13 +2,28 @@ import { FC, useCallback, useEffect, useState } from "react";
 import {
   addMark,
   CellType,
+  finishGame,
   GameStateType,
+  quitUser,
+  refresh,
   setIsPending,
 } from "../../gameSlice";
 import { DispatchType } from "../../../../store/store";
-import { makeFakeMoveCPU, makeMoveCPU } from "../../../../lib/CPUMove";
-import { storageMove } from "../../../../lib/storage";
+import {
+  establishEndGame,
+  makeFakeMoveCPU,
+  makeMoveCPU,
+} from "../../../../lib/CPUMove";
+import {
+  finishGameStorage,
+  refreshStorage,
+  storageMove,
+} from "../../../../lib/storage";
 import Cell from "./Cell";
+import { closePop, openPop } from "../../../InfoPop/infoPopSlice";
+import { getMessage } from "../../../../lib/getMessage";
+import { logout } from "../../../Auth/authSLice";
+import { useNavigate } from "react-router-dom";
 
 type PropsType = {
   gameState: GameStateType;
@@ -21,6 +36,47 @@ const getLenEmpty = (gameState: GameStateType) =>
 
 const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const [fakeHover, setFakeHover] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const listenEndGame = useCallback(
+    (freshStatus: GameStateType) => {
+      if (typeof freshStatus.currWinner !== "object" || freshStatus.isSuccess)
+        return;
+
+      const res = establishEndGame(freshStatus);
+      if (typeof res === "string") {
+        finishGameStorage(freshStatus, res);
+
+        dispatch(finishGame(res));
+
+        dispatch(
+          openPop({
+            ...getMessage(res),
+            icon:
+              res !== "tie"
+                ? res === "user"
+                  ? freshStatus.user.mark
+                  : freshStatus.CPU.mark
+                : undefined,
+            leftBtnAction: () => {
+              sessionStorage.removeItem("user");
+              sessionStorage.removeItem("gameState");
+              dispatch(quitUser());
+              dispatch(logout());
+              dispatch(closePop());
+
+              navigate("/");
+            },
+            rightBtnAction: () => {
+              dispatch(refresh(refreshStorage(freshStatus)));
+              dispatch(closePop());
+            },
+          })
+        );
+      }
+    },
+    [dispatch, navigate]
+  );
 
   const createThinker = useCallback(async () => {
     if (!gameState.isPending || gameState.CPU.hasMoved) return;
@@ -38,7 +94,7 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
 
             count++;
             res(false);
-          }, 400);
+          }, 200);
         });
 
         if (shouldStop) break;
@@ -62,14 +118,15 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
     }
 
     const move = makeMoveCPU(gameState).id;
-    storageMove(gameState, move);
+    const updatedStatus = storageMove(gameState, move);
+    listenEndGame(updatedStatus);
 
     dispatch(
       addMark({
         id: move,
       })
     );
-  }, [dispatch, gameState, clickRefCLear]);
+  }, [dispatch, gameState, clickRefCLear, listenEndGame]);
 
   useEffect(() => {
     createThinker();
@@ -96,9 +153,11 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
     if (typeof el.val !== "object") return null;
 
     clickRefCLear.current = false;
-    dispatch(addMark({ id: el.id }));
 
-    storageMove(gameState, el.id);
+    const updatedStatus = storageMove(gameState, el.id);
+    listenEndGame(updatedStatus);
+
+    dispatch(addMark({ id: el.id }));
   };
 
   return (

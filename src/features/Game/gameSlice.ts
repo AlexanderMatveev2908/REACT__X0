@@ -27,26 +27,25 @@ export interface GameStateType {
 }
 
 const savedData = sessionStorage.getItem("gameState");
-const initState: GameStateType = savedData
-  ? JSON.parse(savedData)
-  : {
-      user: {
-        mark: "0",
-        score: 0,
-        hasMoved: true,
-      },
-      CPU: {
-        mark: "X",
-        score: 0,
-        hasMoved: true,
-      },
-      currMark: "X",
-      currWinner: null,
-      ties: 0,
-      gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
-      isPending: false,
-      isSuccess: false,
-    };
+const defStatus: GameStateType = {
+  user: {
+    mark: "0",
+    score: 0,
+    hasMoved: true,
+  },
+  CPU: {
+    mark: "X",
+    score: 0,
+    hasMoved: true,
+  },
+  currMark: "X",
+  currWinner: null,
+  ties: 0,
+  gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
+  isPending: false,
+  isSuccess: false,
+};
+const initState: GameStateType = savedData ? JSON.parse(savedData) : defStatus;
 
 const gameSlice = createSlice({
   name: "game",
@@ -117,7 +116,7 @@ const gameSlice = createSlice({
       else if (action.payload === "CPU") state.CPU.score++;
       else state.ties++;
     },
-    quitUser: () => initState,
+    quitUser: () => defStatus,
   },
 });
 
