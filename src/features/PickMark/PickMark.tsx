@@ -5,8 +5,8 @@ import Title from "../../components/Title";
 import ButtonsMark from "./ButtonsMark/ButtonsMark";
 import ButtonBasic from "../../components/ButtonBasic";
 import { z } from "zod";
-import { useDispatch } from "react-redux";
-import { DispatchType } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { DispatchType, RootStateType } from "../../store/store";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,7 @@ const PickMark: FC = () => {
   const navigate = useNavigate();
 
   const dispatch: DispatchType = useDispatch();
+  const gameState = useSelector((state: RootStateType) => state.game);
   const { setValue, watch, handleSubmit } = useForm<MarkFormType>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -35,6 +36,23 @@ const PickMark: FC = () => {
 
   const handleSave = handleSubmit((formData) => {
     dispatch(setUserMark(formData.mark));
+
+    const updatedState = {
+      ...gameState,
+      user: {
+        ...gameState.user,
+        mark: formData.mark,
+        hasMoved: formData.mark === "0",
+      },
+      CPU: {
+        ...gameState.CPU,
+        mark: formData.mark === "X" ? "0" : "X",
+        hasMoved: formData.mark === "X",
+      },
+      isPending: formData.mark === "0",
+    };
+    sessionStorage.setItem("gameState", JSON.stringify(updatedState));
+
     navigate("/game");
   });
 
