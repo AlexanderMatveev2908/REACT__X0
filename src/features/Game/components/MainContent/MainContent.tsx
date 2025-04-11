@@ -1,13 +1,18 @@
 import { FC, useCallback, useEffect, useState } from "react";
-import Cell from "./Cell";
-import { addMark, CellType, GameStateType, setIsPending } from "../gameSlice";
-import { DispatchType } from "../../../store/store";
+import {
+  addMark,
+  CellType,
+  GameStateType,
+  setIsPending,
+} from "../../gameSlice";
+import { DispatchType } from "../../../../store/store";
 import {
   establishEndGame,
   makeFakeMoveCPU,
   makeMoveCPU,
-} from "../../../lib/CPUMove";
-import { storageMove } from "../../../lib/storage";
+} from "../../../../lib/CPUMove";
+import { storageMove } from "../../../../lib/storage";
+import Cell from "./Cell";
 
 type PropsType = {
   gameState: GameStateType;

@@ -23,6 +23,7 @@ export interface GameStateType {
   currWinner: EndGameType;
   gridGame: CellType[];
   isPending: boolean;
+  isSuccess: boolean;
 }
 
 const savedData = sessionStorage.getItem("gameState");
@@ -44,6 +45,7 @@ const initState: GameStateType = savedData
       ties: 0,
       gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
       isPending: false,
+      isSuccess: false,
     };
 
 const gameSlice = createSlice({
@@ -106,6 +108,7 @@ const gameSlice = createSlice({
       state.currWinner = action.payload;
 
       state.isPending = false;
+      state.isSuccess = true;
       state.CPU.hasMoved = true;
       state.user.hasMoved = true;
 
