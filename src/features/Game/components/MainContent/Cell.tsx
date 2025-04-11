@@ -73,21 +73,21 @@ const Cell: FC<PropsType> = ({
             ) : null
           ) : typeof val !== "object" ? (
             val === "X" ? (
-              <img src={assetsApp.__x__game_fill} alt="" />
+              <img src={assetsApp.x__game_fill} alt="" />
             ) : (
-              <img src={assetsApp.__0__game_fill} alt="" />
+              <img src={assetsApp.o__game_fill} alt="" />
             )
           ) : fakeHover ? (
             gameState.CPU.mark === "X" ? (
-              <img src={assetsApp.__x__game_empty} alt="" />
+              <img src={assetsApp.x__game_empty} alt="" />
             ) : (
-              <img src={assetsApp.__0__game_empty} alt="" />
+              <img src={assetsApp.o__game_empty} alt="" />
             )
           ) : isHover && !isDisabled ? (
             gameState.user.mark === "X" ? (
-              <img src={assetsApp.__x__game_empty} alt="" />
+              <img src={assetsApp.x__game_empty} alt="" />
             ) : (
-              <img src={assetsApp.__0__game_empty} alt="" />
+              <img src={assetsApp.o__game_empty} alt="" />
             )
           ) : null}
         </div>
