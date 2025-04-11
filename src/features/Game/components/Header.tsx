@@ -23,8 +23,6 @@ type PropsType = {
   hasEffectRun: React.RefObject<boolean>;
 };
 
-// ss
-
 const Header: FC<PropsType> = ({
   gameState,
   dispatch,
