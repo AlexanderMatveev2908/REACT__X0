@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+.btn__left {
+  background: var(--white__2);
+  color: var(--bg__0);
+}
+.btn__right {
+  background: var(--blue_pr__1);
+  color: var(--white__2);
+}
+.btn__left,
+.btn__right {
+  @apply relative z-60 rounded-[15px] cursor-pointer;
+}
