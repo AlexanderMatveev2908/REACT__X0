@@ -6,6 +6,7 @@ import { isObjOk } from "../../lib/getObjProp";
 import style from "./InfoPop.module.css";
 import ElementShadow from "../../components/ElementShadow";
 import { v4 } from "uuid";
+import { assetsApp } from "../../assets/assets";
 
 const InfoPop: FC = () => {
   const [ids] = useState(Array.from({ length: 2 }, () => v4()));
@@ -23,17 +24,32 @@ const InfoPop: FC = () => {
       >
         <h1 className="txt__h_sm">{infoState.infoPop?.headTxt}</h1>
 
-        <h1
-          className={`txt__h_lg ${
-            infoState?.infoPop
-              ? infoState.infoPop.icon === "X"
-                ? "text-[#008aff]"
-                : "text-[#ffaa00]"
-              : ""
-          }`}
-        >
-          {infoState.infoPop?.mainTxt}
-        </h1>
+        <div className="w-full grid justify-items-center gap-y-[15px]">
+          {typeof infoState.infoPop?.icon === "string" && (
+            <div className="w-[50px] h-[50px]">
+              <img
+                src={
+                  infoState.infoPop?.icon === "X"
+                    ? assetsApp.x__infopop
+                    : assetsApp.o__infopop
+                }
+                alt=""
+              />
+            </div>
+          )}
+
+          <h1
+            className={`txt__h_lg ${
+              infoState?.infoPop?.icon
+                ? infoState.infoPop.icon === "X"
+                  ? "text-[#008aff]"
+                  : "text-[#ffaa00]"
+                : ""
+            }`}
+          >
+            {infoState.infoPop?.mainTxt}
+          </h1>
+        </div>
 
         <div className="w-full grid grid-cols-2 gap-x-[15px]">
           {ids.map((id, i) => (
