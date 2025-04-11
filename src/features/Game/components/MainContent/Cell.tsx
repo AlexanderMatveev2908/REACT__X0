@@ -2,9 +2,6 @@ import { FC, useState } from "react";
 import ElementShadow from "../../../../components/ElementShadow";
 import { MarkType } from "../../../PickMark/PickMark";
 import { assetsApp } from "../../../../assets/assets";
-// @ts-expect-error dummy tsc
-// eslint-disable-next-line
-import { clearStorage } from "../../../lib/clearData";
 import { GameStateType } from "../../gameSlice";
 import MiniX from "../../../../components/MiniMarks/MiniX";
 import { setStyle } from "../../../../lib/styleSetter";
