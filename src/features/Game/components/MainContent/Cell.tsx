@@ -28,7 +28,7 @@ const Cell: FC<PropsType> = ({
     <button
       onClick={handleClick}
       disabled={isDisabled}
-      className="w-[140px] min-h-[140px] enabled:cursor-pointer"
+      className="w-[140px] min-h-[140px] el__cursor"
     >
       <ElementShadow {...{ styleShadow: "el__shadow_sm" }}>
         <div

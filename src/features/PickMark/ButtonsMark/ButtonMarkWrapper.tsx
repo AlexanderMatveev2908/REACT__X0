@@ -17,7 +17,7 @@ const ButtonMarkWrapper: FC<PropsType> = ({
     <button
       onClick={handleClick}
       type="button"
-      className={`w-full min-h-full rounded-[15px] flex justify-center items-center cursor-pointer transition-all duration-300 ${classStyle}`}
+      className={`w-full min-h-full rounded-[15px] flex justify-center items-center el__cursor transition-all duration-300 ${classStyle}`}
       {...inlineStyle}
     >
       <div className="relative min-w-[32px] min-h-[32px]">{children}</div>

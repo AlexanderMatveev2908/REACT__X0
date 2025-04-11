@@ -92,6 +92,10 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
   appearance: none;
 }
 
+.el__cursor:enabled:hover {
+  cursor: url("./assets//cursor_app.png"), auto;
+}
+
 /* 🎉🎉🎉🎉 */
 .CENTER_A_DIV😎 {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;

@@ -63,7 +63,7 @@ const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
       <button
         disabled={!plainCells}
         onClick={handleCLick}
-        className="w-fit disabled:opacity-50 flex justify-self-end min-h-[52px] enabled:cursor-pointer transition-all duration-300 enabled:hover:scale-110"
+        className="w-fit disabled:opacity-50 flex justify-self-end min-h-[52px] el__cursor transition-all duration-300 enabled:hover:scale-110"
       >
         <ElementShadow {...{ styleShadow: "el__shadow_lg" }}>
           <div className="el__refresh min-h-[52px] px-[30px] flex justify-center items-center">

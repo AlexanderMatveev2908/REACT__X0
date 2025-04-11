@@ -55,7 +55,7 @@ const InfoPop: FC = () => {
           {ids.map((id, i) => (
             <div
               key={id}
-              className={`rounded-[15px] flex justify-center items-center  max-w-fit min-h-[52px] cursor-pointer ${
+              className={`rounded-[15px] flex justify-center items-center  max-w-fit min-h-[52px] ${
                 !i
                   ? "min-w-[100px] justify-self-center"
                   : "min-w-[170px] justify-self-start"
@@ -70,7 +70,7 @@ const InfoPop: FC = () => {
                   }
                   className={`${
                     !i ? "min-w-[100px]" : "min-w-[170px]"
-                  } max-w-fit min-h-[52px] flex justify-center items-center px-[30px]  ${
+                  }  max-w-fit min-h-[52px] flex justify-center items-center px-[30px] el__cursor ${
                     !i ? style.btn__left : style.btn__right
                   }`}
                 >
