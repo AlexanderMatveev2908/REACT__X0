@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Cell from "./Cell";
 import { addMark, CellType, GameStateType } from "../gameSlice";
 import { DispatchType } from "../../../store/store";
@@ -103,6 +103,19 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch }) => {
   //   }
   // }, [gameState, dispatch]);
 
+  const getDisabled = useCallback(
+    (cell: CellType) => {
+      const val = gameState.gridGame.find((el) => el.id === cell.id)?.val;
+
+      return (
+        gameState.isPending ||
+        gameState.user.hasMoved ||
+        typeof val === "string"
+      );
+    },
+    [gameState.isPending, gameState.user.hasMoved, gameState.gridGame]
+  );
+
   const handleClick = (el: CellType) => {
     if (typeof el.val !== "object") return null;
 
@@ -139,6 +152,7 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch }) => {
             val: el.val,
             handleClick: () => handleClick(el),
             fakeHover: fakeHover === i,
+            isDisabled: getDisabled(el),
           }}
         />
       ))}
