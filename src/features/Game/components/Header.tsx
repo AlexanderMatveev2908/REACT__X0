@@ -1,4 +1,4 @@
-import { FC, SetStateAction } from "react";
+import { FC } from "react";
 import { assetsApp } from "../../../assets/assets";
 import ElementShadow from "../../../components/ElementShadow";
 import Logo from "../../../components/Logo";
@@ -10,18 +10,11 @@ type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
   clickRefreshRef: React.RefObject<boolean>;
-  setClickRefreshState: React.Dispatch<SetStateAction<boolean>>;
 };
 
-const Header: FC<PropsType> = ({
-  gameState,
-  dispatch,
-  clickRefreshRef,
-  setClickRefreshState,
-}) => {
+const Header: FC<PropsType> = ({ gameState, dispatch, clickRefreshRef }) => {
   const handleCLick = () => {
     clickRefreshRef.current = true;
-    setClickRefreshState(true);
 
     dispatch(refresh(refreshStorage(gameState)));
   };

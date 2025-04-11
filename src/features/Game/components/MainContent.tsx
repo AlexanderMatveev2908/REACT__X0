@@ -9,7 +9,6 @@ type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
   clickRefreshRef: React.RefObject<boolean>;
-  clickRefreshState: boolean;
 };
 
 const MainContent: FC<PropsType> = ({
@@ -19,7 +18,6 @@ const MainContent: FC<PropsType> = ({
 }) => {
   const [fakeHover, setFakeHover] = useState<number | null>(null);
   const hasEffectRun = useRef<boolean>(false);
-  const rollbackRef = useRef<boolean>(false);
 
   // VERSION WITH PROMISE AND TIMEOUT LIKE IT WOULD BE ASYNC OPERATION, IS A PATTERN WE USE TO MAKE MULTIPLE ASYNC OPERATION USUALLY IN BACKEND WHEN IS ABOUT FOR EXAMPLE UPLOAD AN IMAGE ON CLOUD WHERE OR WE MAKE AN ARRAY OF PROMISES IN MAP OR INSIDE A DO WHILE MAKE OPERATION BUT WITHOUT WAIT IT WE PUSH PROMISE IN ARRAY IN PROMISES AND AT THE END WE WAIT FOR ALL WITH PROMISE.ALL\
 
