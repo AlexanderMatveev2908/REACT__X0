@@ -94,7 +94,7 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
 
             count++;
             res(false);
-          }, 350);
+          }, 400);
         });
 
         if (shouldStop) break;
