@@ -1,51 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { assetsApp } from "../../../assets/assets";
 import ElementShadow from "../../../components/ElementShadow";
 import Logo from "../../../components/Logo";
 import { DispatchType } from "../../../store/store";
-import {
-  GameStateType,
-  partialRefreshEnd,
-  partialRefreshStart,
-  refresh,
-} from "../gameSlice";
-import {
-  refreshStorage,
-  partialRefreshStorageStart,
-  partialRefreshStorageEnd,
-} from "../../../lib/storage";
+import { GameStateType, refresh } from "../gameSlice";
+import { refreshStorage } from "../../../lib/storage";
 
 type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
-  clickRefreshRef: React.RefObject<boolean>;
+  clickRefCLear: React.RefObject<boolean>;
 };
 
-const Header: FC<PropsType> = ({ gameState, dispatch, clickRefreshRef }) => {
+const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const handleCLick = () => {
-    clickRefreshRef.current = true;
-
-    if (gameState.user.mark === "X") {
-      dispatch(refresh(refreshStorage(gameState)));
-    } else {
-      dispatch(partialRefreshStart(partialRefreshStorageStart(gameState)));
-    }
+    clickRefCLear.current = true;
+    dispatch(refresh(refreshStorage(gameState)));
   };
-
-  useEffect(() => {
-    let timer: any;
-
-    if (clickRefreshRef.current && gameState.CPU.mark === "X") {
-      timer = setTimeout(() => {
-        clickRefreshRef.current = false;
-        partialRefreshStorageEnd(gameState);
-        dispatch(partialRefreshEnd());
-      }, 1000);
-    }
-
-    return () => clearTimeout(timer);
-  }, [dispatch, clickRefreshRef, gameState]);
 
   return (
     <div className="w-full grid grid-cols-3 items-center">
