@@ -59,7 +59,7 @@ const AuthForm: FC = () => {
         }}
       >
         <div className="el__card_bg">
-          <Title {...{ title: "Let us know more about you" }} />
+          <Title {...{ title: "Let us know more about you".toUpperCase() }} />
 
           <label className="w-full relative">
             {/* IF U PREFER SCALE */}

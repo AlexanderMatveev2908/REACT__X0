@@ -15,8 +15,9 @@ const authSLice = createSlice({
     setUser: (state, action: PayloadAction<string>) => {
       state.user = action.payload;
     },
+    logout: () => initSTate,
   },
 });
 
-export const { setUser } = authSLice.actions;
+export const { setUser, logout } = authSLice.actions;
 export default authSLice.reducer;

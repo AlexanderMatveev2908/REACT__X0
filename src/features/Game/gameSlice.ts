@@ -38,7 +38,7 @@ const initState: GameStateType = savedData
       CPU: {
         mark: "X",
         score: 0,
-        hasMoved: false,
+        hasMoved: true,
       },
       currMark: "X",
       currWinner: null,
@@ -117,12 +117,14 @@ const gameSlice = createSlice({
       else if (action.payload === "CPU") state.CPU.score++;
       else state.ties++;
     },
+    quitUser: () => initState,
   },
 });
 
 export const {
   finishGame,
   setUserMark,
+  quitUser,
   addMark,
   refresh,
   partialRefreshStart,
