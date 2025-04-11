@@ -1,11 +1,21 @@
 import { v4 } from "uuid";
 import { GameStateType } from "../features/Game/gameSlice";
 import { MarkType } from "../features/PickMark/PickMark";
+import { AuthStateType } from "../features/Auth/authSLice";
 
 export const createIds = () => Array.from({ length: 9 }, () => v4());
 
-export const saveStorage = (data: GameStateType) =>
-  sessionStorage.setItem("gameState", JSON.stringify(data));
+export const saveSessionStorage = (
+  data: GameStateType | AuthStateType,
+  key: string
+) => sessionStorage.setItem(key, JSON.stringify(data));
+
+export const saveStorageGame = (data: GameStateType) =>
+  saveSessionStorage(data, "gameState");
+export const saveStorageAuth = (data: AuthStateType) =>
+  saveSessionStorage(data, "authState");
+// export const saveStorageGame = (data: GameStateType) =>
+//   sessionStorage.setItem("gameState", JSON.stringify(data));
 
 export const refreshStorage = (gameState: GameStateType) => {
   const newIds = createIds();
@@ -28,7 +38,7 @@ export const refreshStorage = (gameState: GameStateType) => {
     currMark: "X" as MarkType,
   };
 
-  saveStorage(newState);
+  saveStorageGame(newState);
 
   return newIds;
 };
@@ -52,7 +62,7 @@ export const storageMove = (gameState: GameStateType, move: string) => {
     },
   };
 
-  saveStorage(updatedStatus);
+  saveStorageGame(updatedStatus);
 };
 
 export const updateStoragePending = (gameState: GameStateType) => {
@@ -61,7 +71,7 @@ export const updateStoragePending = (gameState: GameStateType) => {
     isPending: false,
   };
 
-  saveStorage(updated);
+  saveStorageGame(updated);
 };
 
 export const partialRefreshStorageStart = (gameState: GameStateType) => {
@@ -85,7 +95,7 @@ export const partialRefreshStorageStart = (gameState: GameStateType) => {
     currMark: "X",
   };
 
-  saveStorage(newState);
+  saveStorageGame(newState);
 
   return newIds;
 };
@@ -104,5 +114,5 @@ export const partialRefreshStorageEnd = (gameState: GameStateType) => {
     },
   };
 
-  saveStorage(updatedState);
+  saveStorageGame(updatedState);
 };
