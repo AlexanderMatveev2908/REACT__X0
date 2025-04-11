@@ -50,9 +50,9 @@ const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
           <div className="w-full flex justify-center items-center px-[25px] py-[14px] gap-[10px] el__turn_mark">
             <div className="w-[20px] h-[20px]">
               {gameState.currMark === "X" ? (
-                <img src={assetsApp.__x__turn} alt="x__turn" />
+                <img src={assetsApp.x__turn} alt="x__turn" />
               ) : (
-                <img src={assetsApp.__0__turn} alt="0__turn" />
+                <img src={assetsApp.o__turn} alt="o__turn" />
               )}
             </div>
             <span className="txt__h_sm">TURN</span>
@@ -67,7 +67,7 @@ const Header: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
       >
         <ElementShadow {...{ styleShadow: "el__shadow_lg" }}>
           <div className="el__refresh min-h-[52px] px-[30px] flex justify-center items-center">
-            <img src={assetsApp.__refresh} alt="" />
+            <img src={assetsApp.refresh} alt="" />
           </div>
         </ElementShadow>
       </button>

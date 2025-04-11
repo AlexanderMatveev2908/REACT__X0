@@ -1,23 +1,23 @@
-import __logo from "./__logo.png";
-import __x__turn from "./__x__turn.png";
-import __0__turn from "./__0__turn.png";
-import __refresh from "./__refresh.png";
-import __x__game_fill from "./__x__game_fill.png";
-import __0__game_fill from "./__0__game_fill.png";
-import __x__game_empty from "./__x__game_empty.png";
-import __0__game_empty from "./__0__game_empty.png";
-import __x__infopop from "./__x__infopop.png";
-import __0__infopop from "./__0__infopop.png";
+import logo from "./logo.png";
+import x__turn from "./x__turn.png";
+import o__turn from "./o__turn.png";
+import refresh from "./refresh.png";
+import x__game_fill from "./x__game_fill.png";
+import o__game_fill from "./o__game_fill.png";
+import x__game_empty from "./x__game_empty.png";
+import o__game_empty from "./o__game_empty.png";
+import x__infopop from "./x__infopop.png";
+import o__infopop from "./o__infopop.png";
 
 export const assetsApp = {
-  __logo,
-  __x__turn,
-  __0__turn,
-  __refresh,
-  __x__game_fill,
-  __0__game_fill,
-  __x__game_empty,
-  __0__game_empty,
-  __x__infopop,
-  __0__infopop,
+  logo,
+  x__turn,
+  o__turn,
+  refresh,
+  x__game_fill,
+  o__game_fill,
+  x__game_empty,
+  o__game_empty,
+  x__infopop,
+  o__infopop,
 };
