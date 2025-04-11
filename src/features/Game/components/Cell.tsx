@@ -11,16 +11,24 @@ type PropsType = {
   val: MarkType | null;
   handleClick: () => void;
   fakeHover: boolean;
+  isDisabled: boolean;
 };
 
-const Cell: FC<PropsType> = ({ currMark, val, handleClick, fakeHover }) => {
+const Cell: FC<PropsType> = ({
+  currMark,
+  val,
+  handleClick,
+  fakeHover,
+  isDisabled,
+}) => {
   const [isHover, setIsHover] = useState(false);
 
   // clearStorage();
   return (
-    <div
+    <button
       onClick={handleClick}
-      className="w-[140px] min-h-[140px] cursor-pointer"
+      disabled={isDisabled}
+      className="w-[140px] min-h-[140px] enabled:cursor-pointer"
     >
       <ElementShadow {...{ styleShadow: "el__shadow_sm" }}>
         <div
@@ -34,7 +42,7 @@ const Cell: FC<PropsType> = ({ currMark, val, handleClick, fakeHover }) => {
             ) : (
               <img src={assetsApp.__0__game_fill} alt="" />
             )
-          ) : isHover || fakeHover ? (
+          ) : (isHover && !isDisabled) || fakeHover ? (
             currMark === "X" ? (
               <img src={assetsApp.__x__game_empty} alt="" />
             ) : (
@@ -43,7 +51,7 @@ const Cell: FC<PropsType> = ({ currMark, val, handleClick, fakeHover }) => {
           ) : null}
         </div>
       </ElementShadow>
-    </div>
+    </button>
   );
 };
 export default Cell;
