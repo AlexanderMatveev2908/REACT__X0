@@ -36,27 +36,52 @@ export const makeMoveCPU = (gameState: GameStateType) => {
 export const establishEndGame = (gameState: GameStateType): EndGameType => {
   const { gridGame, user, CPU } = gameState;
 
-  const vals = gridGame.map((el) => (el.val ? el : null));
+  const vals = gridGame.map((el) => (el.val ? el : null)).filter((el) => !!el);
   let winner: EndGameType = null;
 
-  if (vals.length < 6) return winner;
+  if (vals.length < 5) return winner;
 
-  let indexUser: string = "";
-  let indexCPU: string = "";
+  const valsUser: number[] = [];
+  const valsCPU: number[] = [];
 
-  let j = 0;
-  while (j < vals.length) {
-    const curr = vals[j];
-    if (curr?.val === user.mark) indexUser += j + ",";
-    else if (curr?.val === CPU.mark) indexCPU += j + ",";
+  let i: number = 0;
 
-    j++;
-  }
+  do {
+    const curr = gridGame[i];
 
-  if (chanceWin.some((str) => indexUser.includes(str))) winner = "user";
-  else if (chanceWin.some((str) => indexCPU.includes(str))) winner = "CPU";
+    if (curr?.val === gameState.user.mark) valsUser.push(i);
+    else if (curr?.val === gameState.CPU.mark) valsCPU.push(i);
 
-  if (winner === null && vals.every((el) => typeof el?.val === "string"))
+    i++;
+  } while (i < gridGame.length);
+
+  console.table(gridGame);
+
+  console.group("USER");
+  console.log(valsUser);
+  console.groupEnd();
+
+  console.group("CPU");
+  console.log(valsCPU);
+  console.groupEnd();
+
+  i = 0;
+
+  do {
+    const curr = chanceWin[i];
+
+    if (curr.every((el) => valsUser.includes(el))) winner = "user";
+    else if (curr.every((el) => valsCPU.includes(el))) winner = "CPU";
+
+    if (typeof winner === "string") break;
+
+    i++;
+  } while (i < chanceWin.length);
+
+  if (
+    winner === null &&
+    gameState.gridGame.every((el) => typeof el?.val === "string")
+  )
     winner = "tie";
 
   if (typeof winner === "string" && !gameState.isSuccess) {
