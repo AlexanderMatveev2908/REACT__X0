@@ -6,6 +6,8 @@ import __x__game_fill from "./__x__game_fill.png";
 import __0__game_fill from "./__0__game_fill.png";
 import __x__game_empty from "./__x__game_empty.png";
 import __0__game_empty from "./__0__game_empty.png";
+import __x__infopop from "./__x__infopop.png";
+import __0__infopop from "./__0__infopop.png";
 
 export const assetsApp = {
   __logo,
@@ -16,4 +18,6 @@ export const assetsApp = {
   __0__game_fill,
   __x__game_empty,
   __0__game_empty,
+  __x__infopop,
+  __0__infopop,
 };

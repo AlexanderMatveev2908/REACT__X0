@@ -65,55 +65,55 @@ export const storageMove = (gameState: GameStateType, move: string) => {
   saveStorageGame(updatedStatus);
 };
 
-export const updateStoragePending = (gameState: GameStateType) => {
-  const updated: GameStateType = {
-    ...gameState,
-    isPending: false,
-    isSuccess: false,
-  };
+// export const updateStoragePending = (gameState: GameStateType) => {
+//   const updated: GameStateType = {
+//     ...gameState,
+//     isPending: false,
+//     isSuccess: false,
+//   };
 
-  saveStorageGame(updated);
-};
+//   saveStorageGame(updated);
+// };
 
-export const partialRefreshStorageStart = (gameState: GameStateType) => {
-  const newIds = createIds();
+// export const partialRefreshStorageStart = (gameState: GameStateType) => {
+//   const newIds = createIds();
 
-  const newState: GameStateType = {
-    ...gameState,
-    gridGame: Array.from({ length: 9 }, (_, i) => ({
-      val: null,
-      id: newIds[i],
-    })),
-    isPending: false,
-    CPU: {
-      ...gameState.CPU,
-      hasMoved: true,
-    },
-    user: {
-      ...gameState.user,
-      hasMoved: true,
-    },
-    currMark: "X",
-  };
+//   const newState: GameStateType = {
+//     ...gameState,
+//     gridGame: Array.from({ length: 9 }, (_, i) => ({
+//       val: null,
+//       id: newIds[i],
+//     })),
+//     isPending: false,
+//     CPU: {
+//       ...gameState.CPU,
+//       hasMoved: true,
+//     },
+//     user: {
+//       ...gameState.user,
+//       hasMoved: true,
+//     },
+//     currMark: "X",
+//   };
 
-  saveStorageGame(newState);
+//   saveStorageGame(newState);
 
-  return newIds;
-};
+//   return newIds;
+// };
 
-export const partialRefreshStorageEnd = (gameState: GameStateType) => {
-  const updatedState = {
-    ...gameState,
-    isPending: gameState.CPU.mark === "X",
-    CPU: {
-      ...gameState.CPU,
-      hasMoved: gameState.CPU.mark === "0",
-    },
-    user: {
-      ...gameState.user,
-      hasMoved: gameState.CPU.mark === "X",
-    },
-  };
+// export const partialRefreshStorageEnd = (gameState: GameStateType) => {
+//   const updatedState = {
+//     ...gameState,
+//     isPending: gameState.CPU.mark === "X",
+//     CPU: {
+//       ...gameState.CPU,
+//       hasMoved: gameState.CPU.mark === "0",
+//     },
+//     user: {
+//       ...gameState.user,
+//       hasMoved: gameState.CPU.mark === "X",
+//     },
+//   };
 
-  saveStorageGame(updatedState);
-};
+//   saveStorageGame(updatedState);
+// };

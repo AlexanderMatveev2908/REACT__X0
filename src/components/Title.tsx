@@ -7,7 +7,7 @@ type PropsType = {
 const Title: FC<PropsType> = ({ title }) => {
   return (
     <div className="w-full flex justify-center">
-      <span className="txt__h__sm">{title}</span>
+      <span className="txt__h_sm">{title}</span>
     </div>
   );
 };

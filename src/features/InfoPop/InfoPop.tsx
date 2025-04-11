@@ -23,7 +23,17 @@ const InfoPop: FC = () => {
       >
         <h1 className="txt__h_sm">{infoState.infoPop?.headTxt}</h1>
 
-        <h1 className="txt__h_lg">{infoState.infoPop?.mainTxt}</h1>
+        <h1
+          className={`txt__h_lg ${
+            infoState?.infoPop
+              ? infoState.infoPop.icon === "X"
+                ? "text-[#008aff]"
+                : "text-[#ffaa00]"
+              : ""
+          }`}
+        >
+          {infoState.infoPop?.mainTxt}
+        </h1>
 
         <div className="w-full grid grid-cols-2 gap-x-[15px]">
           {ids.map((id, i) => (
