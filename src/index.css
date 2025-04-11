@@ -34,6 +34,10 @@ IMPORTANT: for some practical reasons i prefer using snake case instead of kebab
 
 /* TEXT */
 
+.i__info_pop {
+  z-index: 1000;
+}
+
 .txt__h_sm {
   @apply text-[18px] tracking-[1px];
 }
