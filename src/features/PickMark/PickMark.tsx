@@ -7,11 +7,11 @@ import ButtonBasic from "../../components/ButtonBasic";
 import { z } from "zod";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootStateType } from "../../store/store";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { setUserMark } from "../Game/gameSlice";
 import { saveStorageGame } from "../../lib/storage";
+import { useForm } from "react-hook-form";
 
 // tsc will treat vals literally not as string[]
 const markVals = ["X", "0"] as const;
