@@ -55,6 +55,15 @@ export const storageMove = (gameState: GameStateType, move: string) => {
   saveStorage(updatedStatus);
 };
 
+export const updateStoragePending = (gameState: GameStateType) => {
+  const updated: GameStateType = {
+    ...gameState,
+    isPending: false,
+  };
+
+  saveStorage(updated);
+};
+
 export const partialRefreshStorageStart = (gameState: GameStateType) => {
   const newIds = createIds();
 
