@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import Cell from "./Cell";
-import { addMark, CellType, GameStateType, setIsPending } from "../gameSlice";
+import { addMark, CellType, GameStateType } from "../gameSlice";
 import { DispatchType } from "../../../store/store";
 import { makeFakeMoveCPU, makeMoveCPU } from "../../../lib/CPUMove";
 
@@ -11,12 +11,20 @@ type PropsType = {
 
 const MainContent: FC<PropsType> = ({ gameState, dispatch }) => {
   const [fakeHover, setFakeHover] = useState<number | null>(null);
+  const hasEffectRun = useRef<boolean>(false);
 
   // VERSION WITH PROMISE AND TIMEOUT LIKE IT WOULD BE ASYNC OPERATION, IS A PATTERN WE USE TO MAKE MULTIPLE ASYNC OPERATION USUALLY IN BACKEND WHEN IS ABOUT FOR EXAMPLE UPLOAD AN IMAGE ON CLOUD WHERE OR WE MAKE AN ARRAY OF PROMISES IN MAP OR INSIDE A DO WHILE MAKE OPERATION BUT WITHOUT WAIT IT WE PUSH PROMISE IN ARRAY IN PROMISES AND AT THE END WE WAIT FOR ALL WITH PROMISE.ALL
 
   useEffect(() => {
     const createThinker = async () => {
-      if (!gameState.isPending) return;
+      if (
+        !gameState.isPending ||
+        gameState.CPU.hasMoved ||
+        hasEffectRun.current
+      )
+        return;
+
+      hasEffectRun.current = true;
 
       const MAX_COUNT = 5;
       let count = 0;
@@ -36,15 +44,35 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch }) => {
           });
         } while (count <= MAX_COUNT);
 
-      dispatch(setIsPending(false));
       setFakeHover(null);
 
-      dispatch(
-        addMark({
-          id: makeMoveCPU(gameState).id,
-          mark: gameState.currMark,
-        })
-      );
+      if (lenEmpty) {
+        const move = makeMoveCPU(gameState).id;
+
+        const updatedStatus = {
+          ...gameState,
+          gridGame: gameState.gridGame.map((el) =>
+            el.id === move ? { ...el, val: gameState.currMark } : el
+          ),
+          isPending: false,
+          user: {
+            ...gameState.user,
+            hasMoved: false,
+          },
+          CPU: {
+            ...gameState.CPU,
+            hasMoved: true,
+          },
+          currMark: gameState.currMark === "X" ? "0" : "X",
+        };
+        sessionStorage.setItem("gameState", JSON.stringify(updatedStatus));
+
+        dispatch(
+          addMark({
+            id: move,
+          })
+        );
+      }
     };
 
     createThinker();
@@ -76,17 +104,29 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch }) => {
   // }, [gameState, dispatch]);
 
   const handleClick = (el: CellType) => {
-    if (typeof el.val === "object") {
-      dispatch(addMark({ id: el.id, mark: gameState.currMark }));
+    if (typeof el.val !== "object") return null;
 
-      const newState = {
-        ...gameState,
-        gridGame: gameState.gridGame.map((cell) =>
-          cell.id === el.id ? { ...cell, val: gameState.currMark } : cell
-        ),
-      };
-      sessionStorage.setItem("gameState", JSON.stringify(newState));
-    }
+    hasEffectRun.current = false;
+
+    dispatch(addMark({ id: el.id }));
+
+    const newState = {
+      ...gameState,
+      gridGame: gameState.gridGame.map((cell) =>
+        cell.id === el.id ? { ...cell, val: gameState.currMark } : cell
+      ),
+      currMark: gameState.currMark === "X" ? "0" : "X",
+      isPending: true,
+      user: {
+        ...gameState.user,
+        hasMoved: true,
+      },
+      CPU: {
+        ...gameState.CPU,
+        hasMoved: false,
+      },
+    };
+    sessionStorage.setItem("gameState", JSON.stringify(newState));
   };
 
   return (

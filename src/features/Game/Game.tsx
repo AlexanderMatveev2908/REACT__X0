@@ -3,20 +3,14 @@ import Header from "./components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootStateType } from "../../store/store";
 import MainContent from "./components/MainContent";
-import { setIsPending } from "./gameSlice";
 
 const Game: FC = () => {
   const dispatch: DispatchType = useDispatch();
   const gameState = useSelector((state: RootStateType) => state.game);
 
   useEffect(() => {
-    const updateThinking = () => {
-      if (gameState.CPU.mark === gameState.currMark)
-        dispatch(setIsPending(true));
-    };
-    updateThinking();
-    // eslint-disable-next-line
-  }, []);
+    console.log(gameState);
+  }, [gameState]);
 
   return (
     <div className="min-w-[460px] grid gap-[30px] items-start max-h-fit">
