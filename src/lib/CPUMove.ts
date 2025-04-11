@@ -76,6 +76,7 @@ export const establishEndGame = (gameState: GameStateType): EndGameType => {
       },
       ties: winner === "tie" ? gameState.ties + 1 : gameState.ties,
       currWinner: winner,
+      isSuccess: true,
     };
     saveStorageGame(newState);
   }
