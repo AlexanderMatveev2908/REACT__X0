@@ -16,7 +16,6 @@ const Game: FC = () => {
       if (typeof gameState.currWinner !== "object") return;
 
       const res = establishEndGame(gameState);
-      console.log(res);
       if (typeof res === "string") dispatch(finishGame(res));
     };
     listenEndGame();

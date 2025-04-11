@@ -1,5 +1,6 @@
 import { chanceWin } from "../config/endGame";
 import { EndGameType, GameStateType } from "../features/Game/gameSlice";
+import { saveStorage } from "./storage";
 
 // adding 1 to max - min max is included in range
 export const makeRandom = (min: number, max: number) =>
@@ -57,6 +58,27 @@ export const establishEndGame = (gameState: GameStateType): EndGameType => {
 
   if (winner === null && vals.every((el) => typeof el?.val === "string"))
     winner = "tie";
+
+  if (typeof winner === "string") {
+    const newState: GameStateType = {
+      ...gameState,
+      isPending: false,
+      user: {
+        ...user,
+        hasMoved: true,
+        score:
+          winner === "user" ? gameState.user.score + 1 : gameState.user.score,
+      },
+      CPU: {
+        ...CPU,
+        hasMoved: true,
+        score: winner === "CPU" ? gameState.CPU.score + 1 : gameState.CPU.score,
+      },
+      ties: winner === "tie" ? gameState.ties + 1 : gameState.ties,
+      currWinner: winner,
+    };
+    saveStorage(newState);
+  }
 
   return winner;
 };

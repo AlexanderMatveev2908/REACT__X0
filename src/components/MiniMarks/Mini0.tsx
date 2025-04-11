@@ -12,7 +12,6 @@ const Mini0: FC<PropsType> = ({
   inlineStyleOut,
   inlineStyleInner,
 }) => {
-  console.log(classesCustomInner);
   return (
     <>
       <div
