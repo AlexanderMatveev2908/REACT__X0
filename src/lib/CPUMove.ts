@@ -1,4 +1,5 @@
 import { GameStateType } from "../features/Game/gameSlice";
+import { endGame } from "./../config/endGame";
 
 // adding 1 to max - min max is included in range
 export const makeRandom = (min: number, max: number) =>
@@ -29,4 +30,15 @@ export const makeMoveCPU = (gameState: GameStateType) => {
   return filtered.length <= 1
     ? filtered[0]
     : filtered[makeRandom(0, filtered.length - 1)];
+};
+
+export type EndGameType = (typeof endGame)[number];
+
+export const establishEndGame = (gameState: GameStateType): EndGameType => {
+  const { gridGame, user, CPU } = gameState;
+
+  const userMark = user.mark;
+  const CPUmark = CPU.mark;
+
+  const indexVals = gridGame.map((el, i) => (el.val ? i : null));
 };
