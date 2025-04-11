@@ -40,7 +40,6 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   }, [gameState, dispatch, clickRefCLear]);
 
   const makeMoveCPUMemoized = useCallback(() => {
-    console.log(gameState);
     if (
       !getLenEmpty(gameState) ||
       gameState.isPending ||
@@ -83,7 +82,6 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
     if (typeof el.val !== "object") return null;
 
     clickRefCLear.current = false;
-
     dispatch(addMark({ id: el.id }));
 
     storageMove(gameState, el.id);
