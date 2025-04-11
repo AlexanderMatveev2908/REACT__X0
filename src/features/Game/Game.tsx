@@ -12,8 +12,14 @@ const Game: FC = () => {
   const clickRefCLear = useRef<boolean | null>(false);
 
   useEffect(() => {
-    const res = establishEndGame(gameState);
-    if (typeof res === "string") dispatch(finishGame(res));
+    const listenEndGame = () => {
+      if (typeof gameState.currWinner !== "object") return;
+
+      const res = establishEndGame(gameState);
+      console.log(res);
+      if (typeof res === "string") dispatch(finishGame(res));
+    };
+    listenEndGame();
   }, [gameState, dispatch]);
 
   return (

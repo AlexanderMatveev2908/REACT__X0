@@ -86,6 +86,7 @@ const gameSlice = createSlice({
       state.CPU.hasMoved = state.CPU.mark === "0";
       state.user.hasMoved = state.CPU.mark === "X";
       state.currMark = "X";
+      state.currWinner = null;
     },
     partialRefreshStart: (state, action: PayloadAction<string[]>) => {
       state.gridGame = Array.from({ length: 9 }, (_, i) => ({
@@ -103,6 +104,10 @@ const gameSlice = createSlice({
     },
     finishGame: (state, action: PayloadAction<NonNullable<EndGameType>>) => {
       state.currWinner = action.payload;
+
+      state.isPending = false;
+      state.CPU.hasMoved = true;
+      state.user.hasMoved = true;
 
       if (action.payload === "user") state.user.score++;
       else if (action.payload === "CPU") state.CPU.score++;

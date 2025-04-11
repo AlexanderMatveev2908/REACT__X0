@@ -24,7 +24,6 @@ const Cell: FC<PropsType> = ({
 }) => {
   const [isHover, setIsHover] = useState(false);
 
-  // clearStorage();
   return (
     <button
       onClick={handleClick}
@@ -35,9 +34,25 @@ const Cell: FC<PropsType> = ({
         <div
           onMouseOver={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
-          className="el__cell min-w-[140px] min-h-[140px] flex justify-center items-center p-[10px]"
+          className={`el__cell min-w-[140px] min-h-[140px] flex justify-center items-center p-[10px] ${
+            typeof gameState.currWinner === "string"
+              ? `${
+                  val === "X"
+                    ? "bg-[#008aff]"
+                    : val === "0"
+                    ? "bg-[#ffaa00]"
+                    : "bg-[#0e2c42]"
+                }`
+              : "bg-[#0e2c42]"
+          }`}
         >
-          {typeof val !== "object" ? (
+          {typeof gameState.currWinner === "string" ? (
+            val === "X" ? (
+              <img src={assetsApp.__x__game_empty} alt="" />
+            ) : val === "0" ? (
+              <img src={assetsApp.__0__game_empty} alt="" />
+            ) : null
+          ) : typeof val !== "object" ? (
             val === "X" ? (
               <img src={assetsApp.__x__game_fill} alt="" />
             ) : (
