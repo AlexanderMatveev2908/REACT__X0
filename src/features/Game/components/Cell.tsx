@@ -5,9 +5,10 @@ import { assetsApp } from "../../../assets/assets";
 // @ts-expect-error dummy tsc
 // eslint-disable-next-line
 import { clearStorage } from "../../../lib/clearData";
+import { GameStateType } from "../gameSlice";
 
 type PropsType = {
-  currMark: MarkType;
+  gameState: GameStateType;
   val: MarkType | null;
   handleClick: () => void;
   fakeHover: boolean;
@@ -15,7 +16,7 @@ type PropsType = {
 };
 
 const Cell: FC<PropsType> = ({
-  currMark,
+  gameState,
   val,
   handleClick,
   fakeHover,
@@ -42,8 +43,14 @@ const Cell: FC<PropsType> = ({
             ) : (
               <img src={assetsApp.__0__game_fill} alt="" />
             )
-          ) : (isHover && !isDisabled) || fakeHover ? (
-            currMark === "X" ? (
+          ) : fakeHover ? (
+            gameState.CPU.mark === "X" ? (
+              <img src={assetsApp.__x__game_empty} alt="" />
+            ) : (
+              <img src={assetsApp.__0__game_empty} alt="" />
+            )
+          ) : isHover && !isDisabled ? (
+            gameState.user.mark === "X" ? (
               <img src={assetsApp.__x__game_empty} alt="" />
             ) : (
               <img src={assetsApp.__0__game_empty} alt="" />
