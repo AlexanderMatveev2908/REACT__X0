@@ -3,22 +3,18 @@ import Cell from "./Cell";
 import { addMark, CellType, GameStateType, setIsPending } from "../gameSlice";
 import { DispatchType } from "../../../store/store";
 import { makeFakeMoveCPU, makeMoveCPU } from "../../../lib/CPUMove";
-import { storageMove, updateStoragePending } from "../../../lib/storage";
+import { storageMove } from "../../../lib/storage";
 
 type PropsType = {
   gameState: GameStateType;
   dispatch: DispatchType;
-  clickRefreshRef: React.RefObject<boolean>;
+  clickRefCLear: React.RefObject<boolean>;
 };
 
 const getLenEmpty = (gameState: GameStateType) =>
   gameState.gridGame.filter((el) => typeof el.val === "object").length;
 
-const MainContent: FC<PropsType> = ({
-  gameState,
-  dispatch,
-  clickRefreshRef,
-}) => {
+const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const [fakeHover, setFakeHover] = useState<number | null>(null);
 
   const createThinker = useCallback(async () => {
@@ -37,14 +33,14 @@ const MainContent: FC<PropsType> = ({
             res();
           }, 400);
         });
-      } while (count <= MAX_COUNT);
+      } while (count <= MAX_COUNT && !clickRefCLear.current);
 
     setFakeHover(null);
     dispatch(setIsPending(false));
-    updateStoragePending(gameState);
-  }, [gameState, dispatch]);
+  }, [gameState, dispatch, clickRefCLear]);
 
   const makeMoveCPUMemoized = useCallback(() => {
+    console.log(gameState);
     if (
       !getLenEmpty(gameState) ||
       gameState.isPending ||
@@ -86,7 +82,7 @@ const MainContent: FC<PropsType> = ({
   const handleClick = (el: CellType) => {
     if (typeof el.val !== "object") return null;
 
-    clickRefreshRef.current = false;
+    clickRefCLear.current = false;
 
     dispatch(addMark({ id: el.id }));
 
