@@ -41,7 +41,10 @@ const defStatus: GameStateType = {
   currMark: "X",
   currWinner: null,
   ties: 0,
-  gridGame: Array.from({ length: 9 }, () => ({ id: v4(), val: null })),
+  gridGame: Array.from({ length: 9 }, () => ({
+    id: v4(),
+    val: null,
+  })),
   isPending: false,
   isSuccess: false,
 };
