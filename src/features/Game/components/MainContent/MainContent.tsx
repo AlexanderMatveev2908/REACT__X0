@@ -41,7 +41,7 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
   const listenEndGame = useCallback(
     (freshStatus: GameStateType) => {
       if (typeof freshStatus.currWinner !== "object" || freshStatus.isSuccess)
-        return;
+        return null;
 
       const res = establishEndGame(freshStatus);
       if (typeof res === "string") {
@@ -143,10 +143,16 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
       return (
         gameState.isPending ||
         gameState.user.hasMoved ||
-        typeof val === "string"
+        typeof val === "string" ||
+        !!gameState.currWinner
       );
     },
-    [gameState.isPending, gameState.user.hasMoved, gameState.gridGame]
+    [
+      gameState.isPending,
+      gameState.user.hasMoved,
+      gameState.gridGame,
+      gameState.currWinner,
+    ]
   );
 
   const handleClick = (el: CellType) => {
@@ -154,10 +160,9 @@ const MainContent: FC<PropsType> = ({ gameState, dispatch, clickRefCLear }) => {
 
     clickRefCLear.current = false;
 
+    dispatch(addMark({ id: el.id }));
     const updatedStatus = storageMove(gameState, el.id);
     listenEndGame(updatedStatus);
-
-    dispatch(addMark({ id: el.id }));
   };
 
   return (
