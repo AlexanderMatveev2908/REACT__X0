@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* 
+IMPORTANT: for some practical reasons i prefer using snake case instead of kebab case in css naming, but only because i am working just myself on this project, if i would have been in a team i would have followed conventions of css or those one established by team   
+*/
+
+* {
+  font-family: "Chakra Petch";
+}
+
+/* COLORS */
+
+:root {
+  --blue_pr__0: #38a3ff;
+  --blue_pr__1: #008aff;
+
+  --orange__0: #ffaa00;
+  --white__0: #fff;
+  --white__1: whitesmoke;
+  --white__2: #d6ecff;
+
+  --blue_sc__0: #d6ecff;
+  --blue_sc__1: #325471;
+  --blue_sc__2: #091a27;
+  --blue_sc__3: #122d41;
+  --blue_sc__4: #0f283c;
+
+  --bg__0: #0c2233;
+  --bg__1: #0e2c42;
+  --bg__3: #091a27;
+
+  --place: #325471;
+}
+
+/* TEXT */
+
+.i__info_pop {
+  z-index: 1000;
+}
+
+.txt__h_sm {
+  @apply text-[18px] tracking-[1px];
+}
+.txt__h_md {
+  @apply text-[26px] tracking-[1.5px];
+}
+.txt__h_lg {
+  @apply text-[42px] tracking-[2.5px];
+}
+.txt__h_sm,
+.txt__h_md,
+.txt__h_lg {
+  @apply font-[800];
+}
+
+.txt__b {
+  @apply text-[16px] tracking-[0.8px] font-[500];
+}
+
+.txt__btn_md {
+  @apply text-[16px] tracking-[1px];
+}
+.txt__btn_lg {
+  @apply text-[20px] tracking-[1.25px];
+}
+.txt__btn_md,
+.txt__btn_lg {
+  @apply font-[800];
+}
+
+.txt__f {
+  @apply text-[20px] tracking-[1.25px] font-[800];
+}
+
+.txt__h_sm,
+.txt__h_md,
+.txt__h_lg,
+.txt__b,
+.txt__btn_md,
+.txt__btn_lg,
+.txt__f {
+  @apply leading-[auto];
+}
+
+/* GENERAL */
+
+.app__container {
+  background: var(--bg__0);
+}
+
+.btn__clear {
+  appearance: none;
+}
+
+.el__cursor:enabled:hover {
+  cursor: url("./assets//cursor_app.png"), auto;
+}
+
+/* 🎉🎉🎉🎉 */
+.CENTER_A_DIV😎 {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+/* 🎉🎉🎉🎉 */
+
+input[type="text"]:placeholder-shown {
+  color: var(--place);
+}
+
+/* UTILS SHADOW */
+
+.el__card_bg {
+  @apply gap-[30px] w-full p-[30px] grid items-start;
+  z-index: 100;
+}
+.el__cell {
+  z-index: 100;
+}
+.el__turn_mark {
+  background-color: var(--bg__1);
+  z-index: 100;
+}
+.el__refresh {
+  background-color: var(--white__2);
+  z-index: 100;
+}
+.el__btn_bg {
+  background-color: var(--blue_pr__1);
+  z-index: 100;
+  appearance: none;
+}
+.el__btn_bg:enabled:hover {
+  background-color: var(--blue_pr__0);
+}
+
+.el__card_bg,
+.el__turn_mark,
+.el__refresh,
+.el__btn_bg,
+.el__cell {
+  @apply relative rounded-[15px];
+}
+
+.el__shadow_sm {
+  @apply min-h-[105%];
+  background-color: var(--blue_sc__2);
+  z-index: 50;
+}
+.el__shadow_md {
+  @apply min-h-[107.5%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
+.el__shadow_lg {
+  @apply min-h-[112.5%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
+.el__shadow_xl {
+  @apply min-h-[115%];
+  background-color: var(--bg__3);
+  z-index: 50;
+}
+
+.el__shadow_sm,
+.el__shadow_xl,
+.el__shadow_md,
+.el__shadow_lg {
+  @apply absolute inset-0 rounded-[15px] w-full;
+}
